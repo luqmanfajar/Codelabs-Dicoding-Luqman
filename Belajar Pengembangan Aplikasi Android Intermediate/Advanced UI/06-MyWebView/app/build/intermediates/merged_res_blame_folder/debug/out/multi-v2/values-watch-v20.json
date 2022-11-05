@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "C:\\Users\\Fajar\\OneDrive\\Desktop\\Tugas Kuliah\\Dicoding\\Code\\Codelabs_Dicoding\\Belajar Pengembangan Aplikasi Android Intermediate\\Advanced UI\\06-MyWebView\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-watch-v20\\values-watch-v20.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Fajar\\.gradle\\caches\\transforms-3\\f6d97bc02093918e8d13410d94d7a5a4\\transformed\\appcompat-1.5.1\\res\\values-watch-v20\\values-watch-v20.xml",
+                    "from": {
+                        "startLines": "2,5,8",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,214,385",
+                        "endLines": "4,7,10",
+                        "endColumns": "12,12,12",
+                        "endOffsets": "209,380,553"
+                    }
+                }
+            ]
+        }
+    ]
+}

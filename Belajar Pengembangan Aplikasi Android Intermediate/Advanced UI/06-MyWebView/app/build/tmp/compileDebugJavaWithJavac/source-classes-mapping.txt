@@ -1,0 +1,2 @@
+com/luqmanfajar/mywebview/BuildConfig.java
+ com.luqmanfajar.mywebview.BuildConfig
