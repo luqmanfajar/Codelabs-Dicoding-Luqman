@@ -4,8 +4,41 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="af00fa69-6ce9-40d7-8b7d-5532ad88cf63" name="Default Changelist" comment="Update Advanced Ui &amp; Animation">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="af00fa69-6ce9-40d7-8b7d-5532ad88cf63" name="Default Changelist" comment="Update Localization &amp; Accessibility">
+      <change afterPath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/13-Service/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/13-Service/app/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/13-Service/app/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/13-Service/app/proguard-rules.pro" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/13-Service/app/src/androidTest/java/com/luqmanfajar/myservice/ExampleInstrumentedTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/13-Service/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/13-Service/app/src/main/java/com/luqmanfajar/myservice/MainActivity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/13-Service/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/13-Service/app/src/main/res/drawable/ic_launcher_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/13-Service/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/13-Service/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/13-Service/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/13-Service/app/src/main/res/mipmap-hdpi/ic_launcher.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/13-Service/app/src/main/res/mipmap-hdpi/ic_launcher_round.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/13-Service/app/src/main/res/mipmap-mdpi/ic_launcher.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/13-Service/app/src/main/res/mipmap-mdpi/ic_launcher_round.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/13-Service/app/src/main/res/mipmap-xhdpi/ic_launcher.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/13-Service/app/src/main/res/mipmap-xhdpi/ic_launcher_round.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/13-Service/app/src/main/res/mipmap-xxhdpi/ic_launcher.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/13-Service/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/13-Service/app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/13-Service/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/13-Service/app/src/main/res/values-night/themes.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/13-Service/app/src/main/res/values/colors.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/13-Service/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/13-Service/app/src/main/res/values/themes.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/13-Service/app/src/test/java/com/luqmanfajar/myservice/ExampleUnitTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/13-Service/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/13-Service/gradle.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/13-Service/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/13-Service/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/13-Service/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/13-Service/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/13-Service/settings.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +57,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/10-Localization" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
@@ -83,7 +116,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667680506776</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Update Localization &amp; Accessibility">
+      <created>1667779555943</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1667779555943</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -101,6 +141,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Update" />
     <MESSAGE value="Update Advanced Ui &amp; Animation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update Advanced Ui &amp; Animation" />
+    <MESSAGE value="Update Localization &amp; Accessibility" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update Localization &amp; Accessibility" />
   </component>
 </project>
