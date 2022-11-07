@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="af00fa69-6ce9-40d7-8b7d-5532ad88cf63" name="Default Changelist" comment="Update">
-      <change beforePath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/04-Widgets/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/04-Widgets/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/04-Widgets/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/04-Widgets/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/04-Widgets/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/04-Widgets/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/04-Widgets/app/src/main/java/com/luqmanfajar/mywidgets/NumberGenerator.kt" beforeDir="false" />
+    <list default="true" id="af00fa69-6ce9-40d7-8b7d-5532ad88cf63" name="Default Changelist" comment="Update Advanced Ui &amp; Animation">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +24,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Belajar Pengembangan Aplikasi Android Intermediate/Advanced UI/10-Localization" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
@@ -75,7 +69,21 @@
       <option name="project" value="LOCAL" />
       <updated>1667656684748</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Update Advanced Ui &amp; Animation">
+      <created>1667680436775</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1667680436775</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Update Advanced Ui &amp; Animation">
+      <created>1667680506775</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1667680506776</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -92,6 +100,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update" />
+    <MESSAGE value="Update Advanced Ui &amp; Animation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update Advanced Ui &amp; Animation" />
   </component>
 </project>
