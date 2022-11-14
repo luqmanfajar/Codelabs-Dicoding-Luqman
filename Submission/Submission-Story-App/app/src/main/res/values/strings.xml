@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Story-App</string>
+    <string name="welcome_bac">Welcome Back!</string>
+
+    <string name="glad_to_see">
+
+Glad to see you back! Enter your email address and password to log in to your account.
+</string>
+    <string name="name">name</string>
+    <string name="email">email</string>
+    <string name="password">password</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+    <string name="daftar">Daftar</string>
+
+</resources>
