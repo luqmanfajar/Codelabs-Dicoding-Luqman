@@ -1,12 +1,27 @@
 package com.luqmanfajar.story_app.api
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import com.luqmanfajar.story_app.BuildConfig
+import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.RawValue
+import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
+
+
+data class FileUploadResponse(
+    @field:SerializedName("error")
+    val error: Boolean,
+    @field:SerializedName("message")
+    val message: String
+)
 
 data class RegisterResponse(
     @field:SerializedName("error")
@@ -37,7 +52,7 @@ data class LoginResult(
     @field:SerializedName("token")
     val token: String
 )
-
+@Parcelize
 data class StoriesResponse(
     @field:SerializedName("listStory")
     val listStory: List<ListStoryItem>,
@@ -48,7 +63,9 @@ data class StoriesResponse(
     @field:SerializedName("message")
     val message: String
 
-)
+): Parcelable
+
+@Parcelize
 data class ListStoryItem(
 
     @field:SerializedName("photoUrl")
@@ -64,20 +81,20 @@ data class ListStoryItem(
     val description: String,
 
     @field:SerializedName("lon")
-    val lon: Any,
+    val lon: @RawValue Any,
 
     @field:SerializedName("id")
     val id: String,
 
     @field:SerializedName("lat")
-    val lat: Any
-)
-
+    val lat: @RawValue Any
+): Parcelable
 
 interface ApiService{
     @FormUrlEncoded
     @POST("/v1/register")
     fun createUser(
+
         @Field("name") name: String,
         @Field("email") email: String,
         @Field("password") password: String,
@@ -94,9 +111,15 @@ interface ApiService{
     @GET("/v1/stories")
     fun getStories(
        @Query("page") page: Int,
-       @Header("Authorization : Bearer<{token}>") token: String
 
     ): Call<StoriesResponse>
+
+    @Multipart
+    @POST("/v1/stories")
+    fun uploadImage(
+        @Part file: MultipartBody.Part,
+        @Part("description") description: RequestBody,
+    ): Call<FileUploadResponse>
 
 }
 
@@ -114,6 +137,27 @@ class ApiConfig {
                 .build()
             return retrofit.create(ApiService::class.java)
         }
+
+    fun getApiService2(auth :String): ApiService {
+        val loggingInterceptor = if(BuildConfig.DEBUG) {
+            HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+        } else {
+            HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE)
+        }
+        val builder = OkHttpClient.Builder()
+        builder.addInterceptor { chain ->
+            val request: Request =
+                chain.request().newBuilder().addHeader("Authorization", "Bearer "+auth).build()
+            chain.proceed(request)
+        }
+        builder.addInterceptor(loggingInterceptor).build()
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://story-api.dicoding.dev/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(builder.build())
+            .build()
+        return retrofit.create(ApiService::class.java)
+    }
 
 
     }
