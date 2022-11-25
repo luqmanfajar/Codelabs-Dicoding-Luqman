@@ -1,4 +1,4 @@
-package com.luqmanfajar.story_app
+package com.luqmanfajar.story_app.fitur
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -18,10 +18,10 @@ class DetailStory : AppCompatActivity() {
 
         supportActionBar?.title = "Detail Story"
 
-        val imageView: ImageView = binding.RIdTvDetailPhoto
-        val txtName: TextView = binding.RIdIvDetailName
-        val txtDetailDeskripsi: TextView =binding.RIdTvDetailDescription
-        val txtDetailDate: TextView=binding.RIdDetailTanggal
+        val imageView: ImageView = binding.tvDetailPhoto
+        val txtName: TextView = binding.ivDetailName
+        val txtDetailDeskripsi: TextView =binding.tvDetailDescription
+        val txtDetailDate: TextView=binding.tvDetailTanggal
 
         val dataStories =  intent.getParcelableExtra<DataStory>(EXTRA_DETAIL) as DataStory
 

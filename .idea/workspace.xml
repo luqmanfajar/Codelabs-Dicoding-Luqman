@@ -4,45 +4,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="af00fa69-6ce9-40d7-8b7d-5532ad88cf63" name="Default Changelist" comment="Restructuring Folder">
-      <change afterPath="$PROJECT_DIR$/Submission/Submission-Story-App/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Submission/Submission-Story-App/app/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Submission/Submission-Story-App/app/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Submission/Submission-Story-App/app/proguard-rules.pro" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Submission/Submission-Story-App/app/src/androidTest/java/com/luqmanfajar/story_app/ExampleInstrumentedTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Submission/Submission-Story-App/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Submission/Submission-Story-App/app/src/main/java/com/luqmanfajar/story_app/MainActivity.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Submission/Submission-Story-App/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Submission/Submission-Story-App/app/src/main/res/drawable/ic_launcher_background.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Submission/Submission-Story-App/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Submission/Submission-Story-App/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Submission/Submission-Story-App/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Submission/Submission-Story-App/app/src/main/res/mipmap-hdpi/ic_launcher.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Submission/Submission-Story-App/app/src/main/res/mipmap-hdpi/ic_launcher_round.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Submission/Submission-Story-App/app/src/main/res/mipmap-mdpi/ic_launcher.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Submission/Submission-Story-App/app/src/main/res/mipmap-mdpi/ic_launcher_round.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Submission/Submission-Story-App/app/src/main/res/mipmap-xhdpi/ic_launcher.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Submission/Submission-Story-App/app/src/main/res/mipmap-xhdpi/ic_launcher_round.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Submission/Submission-Story-App/app/src/main/res/mipmap-xxhdpi/ic_launcher.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Submission/Submission-Story-App/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Submission/Submission-Story-App/app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Submission/Submission-Story-App/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Submission/Submission-Story-App/app/src/main/res/values-night/themes.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Submission/Submission-Story-App/app/src/main/res/values/colors.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Submission/Submission-Story-App/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Submission/Submission-Story-App/app/src/main/res/values/themes.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Submission/Submission-Story-App/app/src/main/res/xml/backup_rules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Submission/Submission-Story-App/app/src/main/res/xml/data_extraction_rules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Submission/Submission-Story-App/app/src/test/java/com/luqmanfajar/story_app/ExampleUnitTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Submission/Submission-Story-App/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Submission/Submission-Story-App/gradle.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Submission/Submission-Story-App/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Submission/Submission-Story-App/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Submission/Submission-Story-App/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Submission/Submission-Story-App/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Submission/Submission-Story-App/settings.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="af00fa69-6ce9-40d7-8b7d-5532ad88cf63" name="Default Changelist" comment="Submission First Attempt" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -155,7 +117,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667840829369</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Submission First Attempt">
+      <created>1668435903487</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1668435903488</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -176,6 +145,7 @@
     <MESSAGE value="Update Service" />
     <MESSAGE value="Update Media" />
     <MESSAGE value="Restructuring Folder" />
-    <option name="LAST_COMMIT_MESSAGE" value="Restructuring Folder" />
+    <MESSAGE value="Submission First Attempt" />
+    <option name="LAST_COMMIT_MESSAGE" value="Submission First Attempt" />
   </component>
 </project>

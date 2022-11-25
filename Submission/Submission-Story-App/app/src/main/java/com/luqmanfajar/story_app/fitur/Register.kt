@@ -1,5 +1,6 @@
-package com.luqmanfajar.story_app
+package com.luqmanfajar.story_app.fitur
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -22,15 +23,22 @@ class Register : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        supportActionBar?.title = "Register Page"
+
+        binding.btnMoveLogin.setOnClickListener{
+            val i = Intent(this, Register::class.java)
+            startActivity(i)
+        }
         binding.btnRegister.setOnClickListener{
             bikinUser()
         }
     }
 
     private fun bikinUser(){
-        var name = binding.edtTextName.text.toString()
-        var email = binding.edtTextEmail.text.toString()
-        var password = binding.edtTextPassword.text.toString()
+        var name = binding.edRegisterName.text.toString()
+        var email = binding.edRegisterEmail.text.toString()
+        var password = binding.edRegisterPassword.text.toString()
+        val i = Intent(this, Login::class.java)
 
         val service = ApiConfig().getApiService().createUser(name, email, password)
         service.enqueue(object : retrofit2.Callback<RegisterResponse> {
@@ -46,6 +54,7 @@ class Register : AppCompatActivity() {
                         Log.d("Main", response.code().toString())
                         Log.d("Main", response.message().toString())
                         binding.txtResponse.setText(response.message())
+                        startActivity(i)
                     }
                 } else {
                     Toast.makeText(this@Register, response.message(), Toast.LENGTH_SHORT).show()

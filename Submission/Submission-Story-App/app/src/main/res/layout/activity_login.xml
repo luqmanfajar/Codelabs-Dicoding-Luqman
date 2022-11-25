@@ -4,20 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login">
+    tools:context=".fitur.Login">
 
-    <Button
-        android:id="@+id/btnDaftar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
-        android:layout_marginTop="404dp"
-        android:text="@string/daftar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/edtLoginPassword"
+    <com.luqmanfajar.story_app.customview.CustomEditText
+        android:id="@+id/ed_login_password"
         android:layout_width="227dp"
         android:layout_height="48dp"
         android:layout_marginStart="92dp"
@@ -26,10 +16,10 @@
         android:hint="@string/password"
         android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtLoginEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/ed_login_email" />
 
     <EditText
-        android:id="@+id/edtLoginEmail"
+        android:id="@+id/ed_login_email"
         android:layout_width="227dp"
         android:layout_height="48dp"
         android:layout_marginStart="92dp"
@@ -48,16 +38,25 @@
         android:layout_marginTop="29dp"
         android:text="@string/login"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtLoginPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/ed_login_password" />
 
     <TextView
         android:id="@+id/txtToken"
         android:layout_width="260dp"
         android:layout_height="36dp"
         android:layout_marginStart="82dp"
-        android:layout_marginTop="29dp"
+        android:layout_marginTop="100dp"
         android:text="token"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnDaftar" />
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password minimum contains 8 characters long"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="@+id/ed_login_password"
+        app:layout_constraintTop_toBottomOf="@+id/ed_login_password" />
 </androidx.constraintlayout.widget.ConstraintLayout>

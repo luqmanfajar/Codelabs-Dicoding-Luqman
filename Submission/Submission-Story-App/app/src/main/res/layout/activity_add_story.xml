@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddStory">
+    tools:context=".fitur.AddStory">
 
     <ImageView
         android:id="@+id/prevImage"
-        android:layout_width="400dp"
-        android:layout_height="360dp"
+        android:layout_width="404dp"
+        android:layout_height="323dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -55,14 +55,14 @@
         app:layout_constraintTop_toBottomOf="@+id/btnCamera">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/R.id.ed_add_description"
+            android:id="@+id/ed_add_description"
             android:layout_width="match_parent"
-            android:layout_height="130dp" />
+            android:layout_height="98dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/btnUpload"
+        android:id="@+id/button_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="164dp"

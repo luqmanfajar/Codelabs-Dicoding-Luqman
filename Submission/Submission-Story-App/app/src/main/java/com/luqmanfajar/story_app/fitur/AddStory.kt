@@ -1,7 +1,8 @@
-package com.luqmanfajar.story_app
+package com.luqmanfajar.story_app.fitur
 
 import android.Manifest
 import android.content.Intent
+import android.content.Intent.ACTION_GET_CONTENT
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -15,7 +16,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import com.luqmanfajar.story_app.api.ApiConfig
 import com.luqmanfajar.story_app.api.FileUploadResponse
+import com.luqmanfajar.story_app.createCustomTempFile
 import com.luqmanfajar.story_app.databinding.ActivityAddStoryBinding
+import com.luqmanfajar.story_app.reduceFileImage
+import com.luqmanfajar.story_app.uriToFile
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -36,7 +40,7 @@ class AddStory : AppCompatActivity() {
     companion object {
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
         private const val REQUEST_CODE_PERMISSIONS = 10
-        const val EXTRA_TOKEN = "extra_token"
+        const val EXTRA_STORY = "extra_token"
     }
 
     override fun onRequestPermissionsResult(
@@ -53,7 +57,7 @@ class AddStory : AppCompatActivity() {
                 Toast.LENGTH_SHORT
             ).show()
             finish()
-        }
+            }
         }
 
     }
@@ -74,17 +78,18 @@ class AddStory : AppCompatActivity() {
                 REQUEST_CODE_PERMISSIONS
             )
         }
-        var tokenAuth = intent.getStringExtra(Story.EXTRA_TOKEN).toString()
+        var tokenAuth = intent.getStringExtra(EXTRA_STORY).toString()
+
 
         binding.btnCamera.setOnClickListener{startTakePhoto()}
         binding.btnGallery.setOnClickListener{startGallery()}
-        binding.btnUpload.setOnClickListener{uploadImage(tokenAuth)}
+        binding.buttonAdd.setOnClickListener{uploadImage(tokenAuth)}
 
 
     }
     private fun startGallery() {
         val intent = Intent()
-        intent.action = Intent.ACTION_GET_CONTENT
+        intent.action = ACTION_GET_CONTENT
         intent.type = "image/*"
         val chooser = Intent.createChooser(intent, "Choose a Picture")
         launcherIntentGallery.launch(chooser)
@@ -136,7 +141,7 @@ class AddStory : AppCompatActivity() {
         if (getFile != null){
             val file = reduceFileImage(getFile as File)
 
-            val txtDesc = binding.RIdEdAddDescription.text.toString()
+            val txtDesc = binding.edAddDescription.text.toString()
             val description = txtDesc.toRequestBody("text/plain".toMediaType())
             val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
             val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(

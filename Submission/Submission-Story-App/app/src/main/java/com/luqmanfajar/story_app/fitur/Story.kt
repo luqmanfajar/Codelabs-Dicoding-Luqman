@@ -1,21 +1,24 @@
-package com.luqmanfajar.story_app
+package com.luqmanfajar.story_app.fitur
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.luqmanfajar.story_app.adapter.ListStoryAdapter
 import com.luqmanfajar.story_app.api.ApiConfig
-import com.luqmanfajar.story_app.api.ApiService
 import com.luqmanfajar.story_app.api.ListStoryItem
 import com.luqmanfajar.story_app.api.StoriesResponse
 import com.luqmanfajar.story_app.data.DataStory
+import com.luqmanfajar.story_app.data.LoginPreferences
+import com.luqmanfajar.story_app.data.preference.LoginViewModel
+import com.luqmanfajar.story_app.data.preference.ViewModelFactory
+import com.luqmanfajar.story_app.dataStore
 import com.luqmanfajar.story_app.databinding.ActivityStoryBinding
-import com.luqmanfajar.story_app.DetailStory.Companion.EXTRA_DETAIL
+import com.luqmanfajar.story_app.fitur.DetailStory.Companion.EXTRA_DETAIL
 import retrofit2.Call
 import retrofit2.Response
 
@@ -36,12 +39,25 @@ class Story : AppCompatActivity() {
         val layoutManager = LinearLayoutManager(this)
         binding.rvStories.layoutManager= layoutManager
 
+        val pref= LoginPreferences.getInstance(dataStore)
+
+        val loginViewModel = ViewModelProvider(this, ViewModelFactory(pref)).get(
+            LoginViewModel::class.java
+        )
 
         var tokenAuth = intent.getStringExtra(EXTRA_TOKEN)
-        getAllStories(tokenAuth.toString())
+
+        if (tokenAuth != null) {
+
+            getAllStories(tokenAuth)
+        } else {
+            var tokenAuthPref = loginViewModel.getAuthKey().toString()
+            getAllStories(tokenAuthPref)
+        }
 
         binding.fabAddStory.setOnClickListener{
             val i = Intent(this, AddStory::class.java)
+            i.putExtra(AddStory.EXTRA_STORY, tokenAuth)
             startActivity(i)
         }
 
@@ -109,3 +125,5 @@ class Story : AppCompatActivity() {
         const val EXTRA_TOKEN = "extra_token"
     }
 }
+
+
