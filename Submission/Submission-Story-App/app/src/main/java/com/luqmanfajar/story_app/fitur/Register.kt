@@ -3,8 +3,8 @@ package com.luqmanfajar.story_app.fitur
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
+import androidx.core.app.ActivityOptionsCompat
 import com.luqmanfajar.story_app.api.ApiConfig
 import com.luqmanfajar.story_app.api.RegisterResponse
 import com.luqmanfajar.story_app.databinding.ActivityRegisterBinding
@@ -25,9 +25,9 @@ class Register : AppCompatActivity() {
 
         supportActionBar?.title = "Register Page"
 
-        binding.btnMoveLogin.setOnClickListener{
-            val i = Intent(this, Register::class.java)
-            startActivity(i)
+        binding.txtMoveLogin.setOnClickListener{
+            val i = Intent(this, Login::class.java)
+            startActivity(i, ActivityOptionsCompat.makeSceneTransitionAnimation(this@Register).toBundle())
         }
         binding.btnRegister.setOnClickListener{
             bikinUser()
@@ -49,16 +49,12 @@ class Register : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
                     if (responseBody != null && !responseBody.error) {
-//                        Toast.makeText(this@Register, responseBody.message, Toast.LENGTH_SHORT).show()
-                        Log.d("Main", response.body().toString())
-                        Log.d("Main", response.code().toString())
-                        Log.d("Main", response.message().toString())
-                        binding.txtResponse.setText(response.message())
-                        startActivity(i)
+                       Toast.makeText(this@Register, "Register Sukses : "+response.message(), Toast.LENGTH_SHORT).show()
+
+                        startActivity(i,ActivityOptionsCompat.makeSceneTransitionAnimation(this@Register).toBundle())
                     }
                 } else {
-                    Toast.makeText(this@Register, response.message(), Toast.LENGTH_SHORT).show()
-                    binding.txtResponse.setText(response.message())
+                    Toast.makeText(this@Register, "Register Gagal : "+response.message(), Toast.LENGTH_SHORT).show()
                 }
             }
             override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
@@ -66,6 +62,4 @@ class Register : AppCompatActivity() {
             }
         })
     }
-
-
 }

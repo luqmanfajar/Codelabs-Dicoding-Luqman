@@ -1,4 +1,4 @@
-package com.luqmanfajar.story_app.data
+package com.luqmanfajar.story_app.data.preference
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
@@ -18,8 +18,13 @@ class LoginPreferences private constructor(private val dataStore: DataStore<Pref
     }
     fun getAuthKey(): Flow<String>{
         return dataStore.data.map { preferences ->
-            preferences[AUTH_KEY]?: "none"
+            preferences[AUTH_KEY]?: ""
 
+        }
+    }
+    suspend fun deleteSession(){
+        dataStore.edit { preferences ->
+            preferences.clear()
         }
     }
 
@@ -30,6 +35,8 @@ class LoginPreferences private constructor(private val dataStore: DataStore<Pref
 
         }
     }
+
+
 
 
 

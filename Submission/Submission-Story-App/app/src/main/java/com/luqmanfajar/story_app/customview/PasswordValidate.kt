@@ -12,7 +12,7 @@ import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import com.luqmanfajar.story_app.R
 
-class CustomEditText : AppCompatEditText, View.OnTouchListener {
+class PasswordValidate : AppCompatEditText, View.OnTouchListener {
 
     private lateinit var errorButtonImage: Drawable
 
@@ -74,8 +74,7 @@ class CustomEditText : AppCompatEditText, View.OnTouchListener {
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        hint = "Masukkan password minimal 8 karakter"
-        textAlignment = View.TEXT_ALIGNMENT_VIEW_START
+
     }
 
 

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Story-App</string>
+    <string name="name">nama</string>
+    <string name="email">email</string>
+    <string name="password">kata sandi</string>
+    <string name="register">Mendaftar</string>
+    <string name="login">Masuk</string>
+    <string name="txt_name">Nama</string>
+    <string name="tanggal">Tanggal</string>
+    <string name="deskripsi">Deskripsi</string>
+    <string name="nama">Nama</string>
+    <string name="uploadDesc">Deskripsi</string>
+    <string name="upload">Unggah</string>
+    <string name="gallery">Galeri</string>
+    <string name="camera">Kamera</string>
+    <string name="menu_1">Keluar</string>
+    <string name="photo">foto</string>
+    <string name="password_length">Kata sandi minimal 8 karakter</string>
+    <string name="txt_not_have_account">Tidak Memiliki Akun?</string>
+    <string name="txt_registerHere">Daftar Disini</string>
+    <string name="txt_haveAccount">Sudah Memiliki Akun?</string>
+    <string name="txt_loginHere">Masuk Disini</string>
+    <string name="txt_signUp">Daftar</string>
+    <string name="txt_SignIn">Masuk</string>
+    <string name="valid_email">Diharuskan email yang valid</string>
+</resources>

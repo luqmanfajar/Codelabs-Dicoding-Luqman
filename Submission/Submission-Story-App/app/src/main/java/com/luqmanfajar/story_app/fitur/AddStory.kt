@@ -160,11 +160,11 @@ class AddStory : AppCompatActivity() {
                     if (response.isSuccessful) {
                         val responseBody = response.body()
                         if (responseBody != null && !responseBody.error) {
-                            Toast.makeText(this@AddStory, responseBody.message, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@AddStory, "Upload Sukses : "+responseBody.message, Toast.LENGTH_SHORT).show()
                             finish()
                         }
                     } else {
-                        Toast.makeText(this@AddStory, response.message(), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@AddStory, "Upload Gagal : "+response.message(), Toast.LENGTH_SHORT).show()
                     }
                 }
                 override fun onFailure(call: Call<FileUploadResponse>, t: Throwable) {

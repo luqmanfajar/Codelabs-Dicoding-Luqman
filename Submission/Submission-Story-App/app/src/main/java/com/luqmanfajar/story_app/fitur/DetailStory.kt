@@ -18,8 +18,8 @@ class DetailStory : AppCompatActivity() {
 
         supportActionBar?.title = "Detail Story"
 
-        val imageView: ImageView = binding.tvDetailPhoto
-        val txtName: TextView = binding.ivDetailName
+        val imageView: ImageView = binding.ivDetailPhoto
+        val txtName: TextView = binding.tvDetailName
         val txtDetailDeskripsi: TextView =binding.tvDetailDescription
         val txtDetailDate: TextView=binding.tvDetailTanggal
 
@@ -31,7 +31,9 @@ class DetailStory : AppCompatActivity() {
         txtName.text = "Nama : "+ dataStories.name
         txtDetailDeskripsi.text =  "Deskripsi : "+ dataStories.description
         txtDetailDate.text= "Tanggal Dibuat : "+ dataStories.createdAt
+
     }
+
 
     companion object{
 

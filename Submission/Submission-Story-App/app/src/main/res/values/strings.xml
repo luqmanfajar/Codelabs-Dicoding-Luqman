@@ -1,24 +1,29 @@
 <resources>
     <string name="app_name">Story-App</string>
-    <string name="welcome_bac">Welcome Back!</string>
 
-    <string name="glad_to_see">
-
-Glad to see you back! Enter your email address and password to log in to your account.
-</string>
     <string name="name">name</string>
     <string name="email">email</string>
     <string name="password">password</string>
     <string name="register">Register</string>
     <string name="login">Login</string>
-    <string name="daftar">Daftar</string>
-    <string name="txt_name">Nama</string>
-    <string name="tanggal">Tanggal</string>
-    <string name="deskripsi">Deskripsi</string>
+    <string name="txt_name">Name</string>
+    <string name="tanggal">Date</string>
+    <string name="deskripsi">Description</string>
     <string name="nama">Nama</string>
     <string name="uploadDesc">Description</string>
     <string name="upload">Upload</string>
     <string name="gallery">Gallery</string>
     <string name="camera">Camera</string>
+    <string name="menu_1">Logout</string>
+    <string name="photo">photo</string>
+    <string name="password_length">Password minimum contains 8 characters long</string>
+    <string name="txt_not_have_account">Didn\'t Have Account?</string>
+    <string name="txt_registerHere">Register Here!</string>
+    <string name="txt_haveAccount">Already have account?</string>
+    <string name="txt_loginHere">Login Here</string>
+    <string name="txt_signUp">Sign Up</string>
+    <string name="txt_SignIn">Sign In</string>
+    <string name="valid_email">Must Be a valid Email</string>
+
 
 </resources>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Story-App</string>
+
+    <string name="name">nombre</string>
+    <string name="email">email</string>
+    <string name="password">password</string>
+    <string name="register">Registro</string>
+    <string name="login">Acceso</string>
+    <string name="txt_name">Mombre</string>
+    <string name="tanggal">Fecha</string>
+    <string name="deskripsi">Descripción</string>
+    <string name="nama">Mombre</string>
+    <string name="uploadDesc">Descripción</string>
+    <string name="upload">Subir</string>
+    <string name="gallery">Galería</string>
+    <string name="camera">Cámara</string>
+    <string name="menu_1">Cerrar sesión</string>
+    <string name="photo">foto</string>
+    <string name="password_length">La contraseña mínima contiene 8 caracteres de largo</string>
+    <string name="txt_not_have_account">No tenía cuenta?</string>
+    <string name="txt_registerHere">Registrarse aquí!</string>
+    <string name="txt_haveAccount">Ya tienes cuenta?</string>
+    <string name="txt_loginHere">Entre aquí</string>
+    <string name="txt_signUp">Inscribirse</string>
+    <string name="txt_SignIn">Registrarse</string>
+    <string name="valid_email">Debe ser un correo electrónico válido</string>
+
+</resources>

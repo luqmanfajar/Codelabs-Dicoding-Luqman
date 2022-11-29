@@ -4,17 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".detailStory">
+    tools:context=".fitur.DetailStory">
 
     <TextView
-        android:id="@+id/iv_detail_name"
+        android:id="@+id/tv_detail_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="32dp"
         android:text="@string/nama"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+        android:transitionName="transisiNama"/>
 
     <TextView
         android:id="@+id/tv_detail_description"
@@ -24,7 +25,8 @@
         android:layout_marginTop="20dp"
         android:text="@string/deskripsi"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_detail_name" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_detail_name"
+        android:transitionName="transisiDeskripsi"/>
 
     <TextView
         android:id="@+id/tv_detail_tanggal"
@@ -34,24 +36,26 @@
         android:layout_marginTop="20dp"
         android:text="@string/tanggal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_detail_description" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_detail_description"
+        android:transitionName="transisiTanggal"/>
 
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="410dp"
         android:layout_height="411dp"
         android:layout_marginStart="1dp"
-        app:layout_constraintBottom_toTopOf="@+id/iv_detail_name"
+        app:layout_constraintBottom_toTopOf="@+id/tv_detail_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5">
 
         <ImageView
-            android:id="@+id/tv_detail_photo"
+            android:id="@+id/iv_detail_photo"
             android:layout_width="411dp"
             android:layout_height="397dp"
             android:layout_marginStart="0dp"
             android:layout_marginTop="0dp"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@tools:sample/avatars"
+            android:transitionName="transisiPhoto"/>
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

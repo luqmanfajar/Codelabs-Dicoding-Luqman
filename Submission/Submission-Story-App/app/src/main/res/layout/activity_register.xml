@@ -9,9 +9,9 @@
     <EditText
         android:id="@+id/ed_register_name"
         android:layout_width="250dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="184dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="248dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/name"
@@ -20,25 +20,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.luqmanfajar.story_app.customview.CustomEditText
-        android:id="@+id/ed_register_password"
-        android:layout_width="250dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="16dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        android:textColorHint="#757575"
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="152dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/register"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ed_register_email" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
         android:id="@+id/ed_register_email"
         android:layout_width="250dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="80dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="88dp"
         android:layout_marginTop="16dp"
         android:autofillHints=""
         android:ems="10"
@@ -48,33 +44,83 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ed_register_name" />
 
-    <Button
-        android:id="@+id/btnRegister"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="147dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/register"
+    <com.luqmanfajar.story_app.customview.PasswordValidate
+        android:id="@+id/ed_register_password"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="88dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:textColorHint="#757575"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ed_register_password" />
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <TextView
-        android:id="@+id/txtResponse"
-        android:layout_width="250dp"
-        android:layout_height="26dp"
-        android:layout_marginTop="88dp"
-        android:layout_marginEnd="80dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/txt_haveAccount"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
 
-    <Button
-        android:id="@+id/btnMoveLogin"
-        android:layout_width="106dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="4dp"
-        android:text="@string/login"
-        app:layout_constraintStart_toStartOf="@+id/btnRegister"
+    <TextView
+        android:id="@+id/txtMoveLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/txt_loginHere"
+        android:textColor="#00838F"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/password_length"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/ed_register_password"
+        app:layout_constraintTop_toBottomOf="@+id/ed_register_password" />
+
+    <ImageView
+        android:id="@+id/imgPerson"
+        android:layout_width="185dp"
+        android:layout_height="173dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/dicoding" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:text="@string/txt_signUp"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/imgPerson"
+        app:layout_constraintTop_toBottomOf="@+id/imgPerson" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/valid_email"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/ed_register_email"
+        app:layout_constraintTop_toBottomOf="@+id/ed_register_email" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

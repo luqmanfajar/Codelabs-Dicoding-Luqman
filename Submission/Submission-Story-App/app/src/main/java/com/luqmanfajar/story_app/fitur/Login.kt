@@ -3,19 +3,19 @@ package com.luqmanfajar.story_app.fitur
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
-import com.luqmanfajar.story_app.customview.CustomEditText
+import com.luqmanfajar.story_app.customview.PasswordValidate
 import com.luqmanfajar.story_app.fitur.Story.Companion.EXTRA_TOKEN
 import com.luqmanfajar.story_app.api.ApiConfig
 import com.luqmanfajar.story_app.api.LoginResponse
-import com.luqmanfajar.story_app.data.LoginModel
-import com.luqmanfajar.story_app.data.LoginPreferences
+import com.luqmanfajar.story_app.customview.CustomButton
+import com.luqmanfajar.story_app.customview.EmailValidate
+import com.luqmanfajar.story_app.data.preference.LoginPreferences
 import com.luqmanfajar.story_app.data.preference.LoginViewModel
 import com.luqmanfajar.story_app.data.preference.ViewModelFactory
 import com.luqmanfajar.story_app.dataStore
@@ -25,9 +25,12 @@ import retrofit2.Response
 
 class Login : AppCompatActivity(), View.OnClickListener {
 
-    private lateinit var customEditText: CustomEditText
+    private lateinit var customPassword: PasswordValidate
+    private lateinit var customButton: CustomButton
+    private lateinit var customEmail: EmailValidate
+
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var loginModel: LoginModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityLoginBinding.inflate(layoutInflater)
 
@@ -35,18 +38,19 @@ class Login : AppCompatActivity(), View.OnClickListener {
         setContentView(binding.root)
 
         supportActionBar?.title = "Login Page"
-        customEditText = binding.edLoginPassword
-
+        customPassword = binding.edLoginPassword
+        customEmail = binding.edLoginEmail
+        customButton = binding.btnLogin
 
         binding.btnLogin.setOnClickListener{
             LoginUser()
-
+        }
+        binding.txtMoveRegister.setOnClickListener{
+            val i = Intent(this, Register::class.java)
+            startActivity(i,ActivityOptionsCompat.makeSceneTransitionAnimation(this@Login).toBundle())
         }
 
-
-
     }
-
 
 
     private fun LoginUser(){
@@ -69,22 +73,19 @@ class Login : AppCompatActivity(), View.OnClickListener {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
                     if (responseBody != null && !responseBody.error) {
-                        Log.d("Main", response.body().toString())
-                        Log.d("Main", response.code().toString())
-                        Log.d("Main", response.message().toString())
 
-                        binding.txtToken.setText(responseBody.loginResult.token)
                         val moveWithObjectIntent = Intent(this@Login, Story::class.java )
                         moveWithObjectIntent.putExtra(EXTRA_TOKEN, responseBody.loginResult.token)
 
                         startActivity(moveWithObjectIntent)
                         loginViewModel.savePref(true,responseBody.loginResult.token)
-
+                        Toast.makeText(this@Login, "Login Sukses", Toast.LENGTH_SHORT).show()
 
                     }
                 } else {
-                    Toast.makeText(this@Login, response.message(), Toast.LENGTH_SHORT).show()
-                    binding.txtToken.setText(response.message())
+                    Toast.makeText(this@Login, "Login gagal : "+response.message(), Toast.LENGTH_SHORT).show()
+
+
                 }
             }
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
@@ -98,18 +99,12 @@ class Login : AppCompatActivity(), View.OnClickListener {
 
     }
 
-    override fun onClick(p0: View?) {
-        TODO("Not yet implemented")
+    override fun onBackPressed() {
+        Toast.makeText(this@Login, "Harus Login terlebih dahulu", Toast.LENGTH_SHORT).show()
     }
 
-    companion object{
-        const val EXTRA_LOGIN = "extra_login"
-        const val RESULT_CODE = 101
-
-        const val TYPE_ADD = 1
-        const val TYPE_DELETE = 2
-
-
+    override fun onClick(p0: View?) {
+        TODO("Not yet implemented")
     }
 
 

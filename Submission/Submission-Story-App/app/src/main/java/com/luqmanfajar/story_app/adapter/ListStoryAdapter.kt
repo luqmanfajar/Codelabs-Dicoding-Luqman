@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.luqmanfajar.story_app.api.ListStoryItem
 import com.luqmanfajar.story_app.databinding.ItemStoriesBinding
 
+
 class ListStoryAdapter(private val listStory: ArrayList<ListStoryItem>) : RecyclerView.Adapter<ListStoryAdapter.ListViewHolder>() {
 
     private lateinit var onItemClickCallback: OnItemClickCallback
@@ -17,6 +18,7 @@ class ListStoryAdapter(private val listStory: ArrayList<ListStoryItem>) : Recycl
     interface OnItemClickCallback {
 
         fun onItemClicked(data: ListStoryItem)
+
     }
 
     class ListViewHolder(var binding: ItemStoriesBinding): RecyclerView.ViewHolder(binding.root) {
@@ -37,7 +39,10 @@ class ListStoryAdapter(private val listStory: ArrayList<ListStoryItem>) : Recycl
         holder.binding.tvItemCreatedAt.text = "Dibuat pada : "+stories.createdAt
         holder.binding.tvItemDeskripsi.text = "Deskripsi : "+stories.description
 
-        holder.itemView.setOnClickListener{onItemClickCallback.onItemClicked(listStory[holder.adapterPosition])}
+        holder.itemView.setOnClickListener{
+            onItemClickCallback.onItemClicked(listStory[holder.adapterPosition])
+
+        }
     }
 
     override fun getItemCount() = listStory.size

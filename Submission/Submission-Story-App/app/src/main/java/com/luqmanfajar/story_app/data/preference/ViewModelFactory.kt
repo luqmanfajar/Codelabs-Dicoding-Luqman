@@ -2,7 +2,6 @@ package com.luqmanfajar.story_app.data.preference
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.luqmanfajar.story_app.data.LoginPreferences
 import java.lang.IllegalArgumentException
 
 class ViewModelFactory(private val pref: LoginPreferences): ViewModelProvider.NewInstanceFactory() {
