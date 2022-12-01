@@ -27,9 +27,4 @@ class LoginViewModel(private val pref: LoginPreferences) : ViewModel() {
          }
         }
 
-
-
-
-
-
 }

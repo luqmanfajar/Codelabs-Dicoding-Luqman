@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="af00fa69-6ce9-40d7-8b7d-5532ad88cf63" name="Default Changelist" comment="Submission First Attempt" />
+    <list default="true" id="af00fa69-6ce9-40d7-8b7d-5532ad88cf63" name="Default Changelist" comment="Submission Third Attempt" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,8 +26,9 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
+    <property name="TODO_SCOPE" value="All Places" />
     <property name="cidr.known.project.marker" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Submission/Submission-Story-App" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
@@ -124,7 +125,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668435903488</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Submission Third Attempt">
+      <created>1669723591870</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1669723591870</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -146,6 +154,7 @@
     <MESSAGE value="Update Media" />
     <MESSAGE value="Restructuring Folder" />
     <MESSAGE value="Submission First Attempt" />
-    <option name="LAST_COMMIT_MESSAGE" value="Submission First Attempt" />
+    <MESSAGE value="Submission Third Attempt" />
+    <option name="LAST_COMMIT_MESSAGE" value="Submission Third Attempt" />
   </component>
 </project>

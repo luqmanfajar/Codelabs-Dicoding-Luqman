@@ -81,13 +81,13 @@ data class ListStoryItem(
     val description: String,
 
     @field:SerializedName("lon")
-    val lon: @RawValue Any,
+    val lon: Double,
 
     @field:SerializedName("id")
     val id: String,
 
     @field:SerializedName("lat")
-    val lat: @RawValue Any
+    val lat: Double
 ): Parcelable
 
 interface ApiService{
@@ -111,6 +111,7 @@ interface ApiService{
     @GET("/v1/stories")
     fun getStories(
        @Query("page") page: Int,
+       @Query("location") location: Int
 
     ): Call<StoriesResponse>
 

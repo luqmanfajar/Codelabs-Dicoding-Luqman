@@ -26,6 +26,7 @@ import com.luqmanfajar.story_app.dataStore
 import com.luqmanfajar.story_app.databinding.ActivityDetailStoryBinding
 import com.luqmanfajar.story_app.databinding.ActivityStoryBinding
 import com.luqmanfajar.story_app.fitur.DetailStory.Companion.EXTRA_DETAIL
+import com.luqmanfajar.story_app.map.MapsActivity
 import retrofit2.Call
 import retrofit2.Response
 
@@ -74,11 +75,17 @@ class Story : AppCompatActivity() {
             startActivity(i,ActivityOptionsCompat.makeSceneTransitionAnimation(this@Story).toBundle())
         }
 
+        binding.fabLocation.setOnClickListener{
+            val i = Intent(this, MapsActivity::class.java)
+            i.putExtra(MapsActivity.EXTRA_MAP, tokenAuth)
+            startActivity(i,ActivityOptionsCompat.makeSceneTransitionAnimation(this@Story).toBundle())
+        }
+
     }
 
     private fun getAllStories(tokenAuth: String){
         showLoading(true)
-        val service = ApiConfig().getApiService2(tokenAuth).getStories(1)
+        val service = ApiConfig().getApiService2(tokenAuth).getStories(1,1)
         service.enqueue(object : retrofit2.Callback<StoriesResponse>{
             override fun onResponse(
                 call: Call<StoriesResponse>,
@@ -91,6 +98,7 @@ class Story : AppCompatActivity() {
                         val arrayStory: ArrayList<ListStoryItem> = responseBody.listStory as ArrayList<ListStoryItem>
                         showRecyclerList(arrayStory)
                         Toast.makeText(this@Story, "Data Loaded", Toast.LENGTH_SHORT).show()
+
 
                     }
                 } else {
@@ -117,7 +125,7 @@ class Story : AppCompatActivity() {
         listStoriesAdapter.setOnItemClickCallback(object : ListStoryAdapter.OnItemClickCallback{
             override fun onItemClicked(data: ListStoryItem) {
                 val moveWithObjectIntent = Intent(this@Story, DetailStory::class.java )
-                moveWithObjectIntent.putExtra(EXTRA_DETAIL, DataStory(data.photoUrl,data.createdAt,data.name,data.description))
+                moveWithObjectIntent.putExtra(EXTRA_DETAIL, DataStory(data.photoUrl,data.createdAt,data.name,data.description,data.lon,data.lat))
                 val optionsCompat: ActivityOptionsCompat =
                     ActivityOptionsCompat.makeSceneTransitionAnimation(
                         this@Story as Activity,
