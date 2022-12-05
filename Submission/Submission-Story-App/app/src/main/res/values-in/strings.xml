@@ -24,4 +24,9 @@
     <string name="txt_signUp">Daftar</string>
     <string name="txt_SignIn">Masuk</string>
     <string name="valid_email">Diharuskan email yang valid</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="normal_type">Normal</string>
+    <string name="satellite_type">Satelit</string>
+    <string name="terrain_type">Medan</string>
+    <string name="hybrid_type">Hibrida</string>
 </resources>

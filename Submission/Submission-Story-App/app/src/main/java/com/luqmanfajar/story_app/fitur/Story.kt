@@ -23,8 +23,8 @@ import com.luqmanfajar.story_app.data.preference.LoginPreferences
 import com.luqmanfajar.story_app.data.preference.LoginViewModel
 import com.luqmanfajar.story_app.data.preference.ViewModelFactory
 import com.luqmanfajar.story_app.dataStore
-import com.luqmanfajar.story_app.databinding.ActivityDetailStoryBinding
 import com.luqmanfajar.story_app.databinding.ActivityStoryBinding
+import com.luqmanfajar.story_app.databinding.ItemStoriesBinding
 import com.luqmanfajar.story_app.fitur.DetailStory.Companion.EXTRA_DETAIL
 import com.luqmanfajar.story_app.map.MapsActivity
 import retrofit2.Call
@@ -34,7 +34,7 @@ class Story : AppCompatActivity() {
 
     private lateinit var binding: ActivityStoryBinding
     private lateinit var rvStory: RecyclerView
-    private lateinit var bindingDetail: ActivityDetailStoryBinding
+    private lateinit var bindingDetail: ItemStoriesBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -116,7 +116,7 @@ class Story : AppCompatActivity() {
 
 
     private fun showRecyclerList(storyItem: ArrayList<ListStoryItem>) {
-        bindingDetail = ActivityDetailStoryBinding.inflate(layoutInflater)
+        bindingDetail = ItemStoriesBinding.inflate(layoutInflater)
         rvStory.layoutManager = LinearLayoutManager(this)
         val listStoriesAdapter = ListStoryAdapter(storyItem)
         rvStory.adapter = listStoriesAdapter
@@ -129,10 +129,10 @@ class Story : AppCompatActivity() {
                 val optionsCompat: ActivityOptionsCompat =
                     ActivityOptionsCompat.makeSceneTransitionAnimation(
                         this@Story as Activity,
-                        Pair(bindingDetail.ivDetailPhoto, "transisiPhoto"),
-                        Pair(bindingDetail.tvDetailName, "transisiNama"),
-                        Pair(bindingDetail.tvDetailDescription, "transisiDeskripsi"),
-                        Pair(bindingDetail.tvDetailTanggal,"transisiTanggal")
+                        Pair(bindingDetail.ivItemPhoto, "transisiPhoto"),
+                        Pair(bindingDetail.tvItemName, "transisiNama"),
+                        Pair(bindingDetail.tvItemDeskripsi, "transisiDeskripsi"),
+                        Pair(bindingDetail.tvItemCreatedAt,"transisiTanggal")
                     )
                 startActivity(moveWithObjectIntent, optionsCompat.toBundle())
             }
@@ -190,9 +190,9 @@ class Story : AppCompatActivity() {
 
     }
 
-    override fun onBackPressed() {
-        Toast.makeText(this@Story, "Harus Logout terlebih dahulu", Toast.LENGTH_SHORT).show()
-    }
+//    override fun onBackPressed() {
+//        Toast.makeText(this@Story, "Harus Logout terlebih dahulu", Toast.LENGTH_SHORT).show()
+//    }
 
 
     companion object{

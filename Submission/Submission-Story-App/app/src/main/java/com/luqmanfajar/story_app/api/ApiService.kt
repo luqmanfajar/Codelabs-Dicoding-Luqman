@@ -4,13 +4,13 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import com.luqmanfajar.story_app.BuildConfig
 import kotlinx.parcelize.Parcelize
-import kotlinx.parcelize.RawValue
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
@@ -114,6 +114,13 @@ interface ApiService{
        @Query("location") location: Int
 
     ): Call<StoriesResponse>
+    @GET("/v1/stories")
+    fun getStory(
+        @Query("page") page: Int,
+        @Query("location") location: Int
+
+    ): Call<StoriesResponse>
+
 
     @Multipart
     @POST("/v1/stories")
@@ -138,6 +145,8 @@ class ApiConfig {
                 .build()
             return retrofit.create(ApiService::class.java)
         }
+
+
 
     fun getApiService2(auth :String): ApiService {
         val loggingInterceptor = if(BuildConfig.DEBUG) {

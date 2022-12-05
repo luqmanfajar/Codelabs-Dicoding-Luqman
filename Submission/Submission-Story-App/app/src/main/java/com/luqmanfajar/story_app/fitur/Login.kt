@@ -44,6 +44,7 @@ class Login : AppCompatActivity(), View.OnClickListener {
 
         binding.btnLogin.setOnClickListener{
             LoginUser()
+
         }
         binding.txtMoveRegister.setOnClickListener{
             val i = Intent(this, Register::class.java)
@@ -79,6 +80,7 @@ class Login : AppCompatActivity(), View.OnClickListener {
 
                         startActivity(moveWithObjectIntent)
                         loginViewModel.savePref(true,responseBody.loginResult.token)
+                        finish()
                         Toast.makeText(this@Login, "Login Sukses", Toast.LENGTH_SHORT).show()
 
                     }

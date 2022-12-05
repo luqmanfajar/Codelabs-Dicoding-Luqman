@@ -25,5 +25,10 @@
     <string name="txt_signUp">Inscribirse</string>
     <string name="txt_SignIn">Registrarse</string>
     <string name="valid_email">Debe ser un correo electrónico válido</string>
+    <string name="title_activity_maps">MapasActividad</string>
+    <string name="normal_type">Normal</string>
+    <string name="satellite_type">Satélite</string>
+    <string name="terrain_type">Terreno</string>
+    <string name="hybrid_type">Híbrida</string>
 
 </resources>

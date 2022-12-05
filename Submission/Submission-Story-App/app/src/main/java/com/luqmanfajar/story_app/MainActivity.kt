@@ -39,9 +39,11 @@ class MainActivity : AppCompatActivity() {
             if (isLogin){
                 val i = Intent(this, Story::class.java)
                 startActivity(i, ActivityOptionsCompat.makeSceneTransitionAnimation(this@MainActivity).toBundle())
+                finish()
             } else {
                 val i = Intent(this, Login::class.java)
                 startActivity(i,ActivityOptionsCompat.makeSceneTransitionAnimation(this@MainActivity).toBundle())
+                finish()
             }
 
         }

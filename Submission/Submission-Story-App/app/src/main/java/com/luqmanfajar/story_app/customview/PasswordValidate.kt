@@ -35,7 +35,7 @@ class PasswordValidate : AppCompatEditText, View.OnTouchListener {
             }
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                if (s.toString().length< 8) showErrorButton() else hideErrorButton()
+                if (s.toString().length< 6) showErrorButton() else hideErrorButton()
             }
 
             override fun afterTextChanged(p0: Editable) {

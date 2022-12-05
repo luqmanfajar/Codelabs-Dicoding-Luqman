@@ -16,7 +16,7 @@
     <string name="camera">Camera</string>
     <string name="menu_1">Logout</string>
     <string name="photo">photo</string>
-    <string name="password_length">Password minimum contains 8 characters long</string>
+    <string name="password_length">Password minimum contains 6 characters long</string>
     <string name="txt_not_have_account">Didn\'t Have Account?</string>
     <string name="txt_registerHere">Register Here!</string>
     <string name="txt_haveAccount">Already have account?</string>
