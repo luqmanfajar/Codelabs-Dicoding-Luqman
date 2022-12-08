@@ -38,8 +38,6 @@ class LoginPreferences private constructor(private val dataStore: DataStore<Pref
 
 
 
-
-
     companion object {
         @Volatile
         private var INSTANCE: LoginPreferences? = null

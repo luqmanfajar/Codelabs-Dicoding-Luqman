@@ -15,10 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.luqmanfajar.story_app.R
 import com.luqmanfajar.story_app.adapter.ListStoryAdapter
-import com.luqmanfajar.story_app.api.ApiConfig
 import com.luqmanfajar.story_app.api.ListStoryItem
-import com.luqmanfajar.story_app.api.StoriesResponse
 import com.luqmanfajar.story_app.data.DataStory
+import com.luqmanfajar.story_app.data.paging.PagingViewModel
 import com.luqmanfajar.story_app.data.preference.LoginPreferences
 import com.luqmanfajar.story_app.data.preference.LoginViewModel
 import com.luqmanfajar.story_app.data.preference.ViewModelFactory
@@ -26,15 +25,25 @@ import com.luqmanfajar.story_app.dataStore
 import com.luqmanfajar.story_app.databinding.ActivityDetailStoryBinding
 import com.luqmanfajar.story_app.databinding.ActivityStoryBinding
 import com.luqmanfajar.story_app.fitur.DetailStory.Companion.EXTRA_DETAIL
+import androidx.activity.viewModels
+import com.luqmanfajar.story_app.adapter.LoadingStateAdapter
+import com.luqmanfajar.story_app.adapter.TesPagingAdapter
+import com.luqmanfajar.story_app.data.paging.PagingModelFactory
+import com.luqmanfajar.story_app.databinding.ItemStoriesBinding
 import com.luqmanfajar.story_app.map.MapsActivity
-import retrofit2.Call
-import retrofit2.Response
+
 
 class Story : AppCompatActivity() {
 
     private lateinit var binding: ActivityStoryBinding
     private lateinit var rvStory: RecyclerView
     private lateinit var bindingDetail: ActivityDetailStoryBinding
+    private lateinit var bindingItem: ItemStoriesBinding
+
+    private val pagingViewModel: PagingViewModel by viewModels {
+
+        PagingModelFactory(this)
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,73 +55,88 @@ class Story : AppCompatActivity() {
         rvStory = binding.rvStories
         rvStory.setHasFixedSize(true)
 
-        val layoutManager = LinearLayoutManager(this)
-        binding.rvStories.layoutManager= layoutManager
 
-        val pref= LoginPreferences.getInstance(dataStore)
-        val loginViewModel = ViewModelProvider(this, ViewModelFactory(pref)).get(
-            LoginViewModel::class.java
-        )
+        binding.rvStories.layoutManager= LinearLayoutManager(this)
+
+//        val pref= LoginPreferences.getInstance(dataStore)
+//        val loginViewModel = ViewModelProvider(this, ViewModelFactory(pref)).get(
+//            LoginViewModel::class.java
+//        )
+
+        getData()
 
 
-        var tokenAuth = intent.getStringExtra(EXTRA_TOKEN)
-
-        if (tokenAuth != null) {
-            getAllStories(tokenAuth)
-        } else {
-            loginViewModel.getAuthKey().observe(this
-            ){
-                    authToken : String ->
-                    tokenAuth = authToken
-                    getAllStories(tokenAuth!!)
-            }
-
-        }
-
+//        var tokenAuth = intent.getStringExtra(EXTRA_TOKEN)
+//
+//        if (tokenAuth != null) {
+//            getAllStories(tokenAuth)
+//        } else {
+//            loginViewModel.getAuthKey().observe(this
+//            ){
+//                    authToken : String ->
+//                    tokenAuth = authToken
+//                    getAllStories(tokenAuth!!)
+//            }
+//
+//        }
+//
         binding.fabAddStory.setOnClickListener{
             val i = Intent(this, AddStory::class.java)
-            i.putExtra(AddStory.EXTRA_STORY, tokenAuth)
             startActivity(i,ActivityOptionsCompat.makeSceneTransitionAnimation(this@Story).toBundle())
         }
 
         binding.fabLocation.setOnClickListener{
             val i = Intent(this, MapsActivity::class.java)
-            i.putExtra(MapsActivity.EXTRA_MAP, tokenAuth)
             startActivity(i,ActivityOptionsCompat.makeSceneTransitionAnimation(this@Story).toBundle())
         }
 
     }
 
-    private fun getAllStories(tokenAuth: String){
-        showLoading(true)
-        val service = ApiConfig().getApiService2(tokenAuth).getStories(1,1)
-        service.enqueue(object : retrofit2.Callback<StoriesResponse>{
-            override fun onResponse(
-                call: Call<StoriesResponse>,
-                response: Response<StoriesResponse>
-            ) {
-                if (response.isSuccessful) {
-                    showLoading(true)
-                    val responseBody = response.body()
-                    if (responseBody != null && !responseBody.error) {
-                        val arrayStory: ArrayList<ListStoryItem> = responseBody.listStory as ArrayList<ListStoryItem>
-                        showRecyclerList(arrayStory)
-                        Toast.makeText(this@Story, "Data Loaded", Toast.LENGTH_SHORT).show()
-
-
-                    }
-                } else {
-                    Toast.makeText(this@Story, response.message(), Toast.LENGTH_SHORT).show()
-
-                }
+    private fun getData(){
+        val adapter = TesPagingAdapter()
+        binding.rvStories.adapter = adapter.withLoadStateFooter(
+            footer = LoadingStateAdapter{
+                adapter.retry()
             }
-            override fun onFailure(call: Call<StoriesResponse>, t: Throwable) {
-                Toast.makeText(this@Story, "Gagal instance Retrofit", Toast.LENGTH_SHORT).show()
-            }
-
-        })
-
+        )
+        pagingViewModel.story.observe(this) { list ->
+            adapter.submitData(lifecycle,list)
+        }
     }
+
+
+
+
+//    private fun getAllStories(tokenAuth: String){
+//        showLoading(true)
+//        val service = ApiConfig().getApiService2(tokenAuth).getStoriesLocation(1,1)
+//        service.enqueue(object : retrofit2.Callback<StoriesResponse>{
+//            override fun onResponse(
+//                call: Call<StoriesResponse>,
+//                response: Response<StoriesResponse>
+//            ) {
+//                if (response.isSuccessful) {
+//                    showLoading(true)
+//                    val responseBody = response.body()
+//                    if (responseBody != null && !responseBody.error) {
+//                        val arrayStory: ArrayList<ListStoryItem> = responseBody.listStory as ArrayList<ListStoryItem>
+//                        showRecyclerList(arrayStory)
+//                        Toast.makeText(this@Story, "Data Loaded", Toast.LENGTH_SHORT).show()
+//
+//
+//                    }
+//                } else {
+//                    Toast.makeText(this@Story, response.message(), Toast.LENGTH_SHORT).show()
+//
+//                }
+//            }
+//            override fun onFailure(call: Call<StoriesResponse>, t: Throwable) {
+//                Toast.makeText(this@Story, "Gagal instance Retrofit", Toast.LENGTH_SHORT).show()
+//            }
+//
+//        })
+//
+//    }
 
 
     private fun showRecyclerList(storyItem: ArrayList<ListStoryItem>) {
@@ -120,7 +144,6 @@ class Story : AppCompatActivity() {
         rvStory.layoutManager = LinearLayoutManager(this)
         val listStoriesAdapter = ListStoryAdapter(storyItem)
         rvStory.adapter = listStoriesAdapter
-
 
         listStoriesAdapter.setOnItemClickCallback(object : ListStoryAdapter.OnItemClickCallback{
             override fun onItemClicked(data: ListStoryItem) {
@@ -137,6 +160,8 @@ class Story : AppCompatActivity() {
                 startActivity(moveWithObjectIntent, optionsCompat.toBundle())
             }
         })
+
+
 
 
     }
@@ -170,29 +195,33 @@ class Story : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        val pref= LoginPreferences.getInstance(dataStore)
-        val loginViewModel = ViewModelProvider(this, ViewModelFactory(pref)).get(
-            LoginViewModel::class.java
-        )
-        var tokenAuth = intent.getStringExtra(EXTRA_TOKEN)
+        getData()
+//        val pref= LoginPreferences.getInstance(dataStore)
+//        val loginViewModel = ViewModelProvider(this, ViewModelFactory(pref)).get(
+//            LoginViewModel::class.java
+//        )
+//        var tokenAuth = intent.getStringExtra(EXTRA_TOKEN)
+//
+//        if (tokenAuth != null) {
+//            getAllStories(tokenAuth)
+//        } else {
+//            loginViewModel.getAuthKey().observe(this
+//            ){
+//                    authToken : String ->
+//                tokenAuth = authToken
+//                getAllStories(tokenAuth!!)
+//            }
+//
+//        }
 
-        if (tokenAuth != null) {
-            getAllStories(tokenAuth)
-        } else {
-            loginViewModel.getAuthKey().observe(this
-            ){
-                    authToken : String ->
-                tokenAuth = authToken
-                getAllStories(tokenAuth!!)
-            }
-
-        }
 
     }
 
-    override fun onBackPressed() {
-        Toast.makeText(this@Story, "Harus Logout terlebih dahulu", Toast.LENGTH_SHORT).show()
-    }
+//    override fun onBackPressed() {
+//        Toast.makeText(this@Story, "Harus Logout terlebih dahulu", Toast.LENGTH_SHORT).show()
+//    }
+
+
 
 
     companion object{

@@ -8,10 +8,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asFlow
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -24,9 +26,11 @@ import com.luqmanfajar.story_app.R
 import com.luqmanfajar.story_app.api.ApiConfig
 import com.luqmanfajar.story_app.api.ListStoryItem
 import com.luqmanfajar.story_app.api.StoriesResponse
-import com.luqmanfajar.story_app.data.DataStory
+import com.luqmanfajar.story_app.data.preference.LoginPreferences
+import com.luqmanfajar.story_app.data.preference.LoginViewModel
+import com.luqmanfajar.story_app.data.preference.ViewModelFactory
+import com.luqmanfajar.story_app.dataStore
 import com.luqmanfajar.story_app.databinding.ActivityMapsBinding
-import com.luqmanfajar.story_app.fitur.DetailStory
 import retrofit2.Call
 import retrofit2.Response
 import java.io.IOException
@@ -84,7 +88,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun getAllStories(tokenAuth: String){
 
-        val service = ApiConfig().getApiService2(tokenAuth).getStories(1,1)
+        val service = ApiConfig().getApiService2(tokenAuth).getStoriesLocation(1,1)
         service.enqueue(object : retrofit2.Callback<StoriesResponse>{
             override fun onResponse(
                 call: Call<StoriesResponse>,
@@ -153,16 +157,27 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
 
-        var tokenAuth = intent.getStringExtra(EXTRA_MAP).toString()
-        mMap = googleMap
+        val pref = LoginPreferences.getInstance(dataStore)
 
+        val loginViewModel = ViewModelProvider(this, ViewModelFactory(pref)).get(
+            LoginViewModel::class.java
+        )
+
+//        var tokenAuth = loginViewModel.getAuthKey()
+//        var tokenAuth = intent.getStringExtra(EXTRA_MAP).toString()
+        mMap = googleMap
 
         mMap.uiSettings.isZoomControlsEnabled = true
         mMap.uiSettings.isIndoorLevelPickerEnabled = true
         mMap.uiSettings.isCompassEnabled = true
         mMap.uiSettings.isMapToolbarEnabled = true
+        loginViewModel.getAuthKey().observe(this
+        ){
+                authToken : String ->
 
-        getAllStories(tokenAuth)
+            getAllStories(authToken!!)
+        }
+//        getAllStories(tokenAuth)
         getMyLocation()
 
     }

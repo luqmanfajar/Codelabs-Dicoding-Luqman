@@ -19,6 +19,7 @@ import com.luqmanfajar.story_app.data.preference.LoginPreferences
 import com.luqmanfajar.story_app.data.preference.LoginViewModel
 import com.luqmanfajar.story_app.data.preference.ViewModelFactory
 import com.luqmanfajar.story_app.dataStore
+import com.luqmanfajar.story_app.database.di.Injection
 import com.luqmanfajar.story_app.databinding.ActivityLoginBinding
 import retrofit2.Call
 import retrofit2.Response
@@ -74,12 +75,13 @@ class Login : AppCompatActivity(), View.OnClickListener {
                     val responseBody = response.body()
                     if (responseBody != null && !responseBody.error) {
 
-                        val moveWithObjectIntent = Intent(this@Login, Story::class.java )
+                        val moveWithObjectIntent = Intent(this@Login, Story::class.java)
                         moveWithObjectIntent.putExtra(EXTRA_TOKEN, responseBody.loginResult.token)
 
                         startActivity(moveWithObjectIntent)
                         loginViewModel.savePref(true,responseBody.loginResult.token)
                         Toast.makeText(this@Login, "Login Sukses", Toast.LENGTH_SHORT).show()
+                        finish()
 
                     }
                 } else {

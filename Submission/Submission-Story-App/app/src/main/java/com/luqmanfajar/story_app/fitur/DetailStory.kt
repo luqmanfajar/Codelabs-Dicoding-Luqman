@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.luqmanfajar.story_app.api.ListStoryItem
 import com.luqmanfajar.story_app.data.DataStory
 import com.luqmanfajar.story_app.databinding.ActivityDetailStoryBinding
 
@@ -23,14 +24,14 @@ class DetailStory : AppCompatActivity() {
         val txtDetailDeskripsi: TextView =binding.tvDetailDescription
         val txtDetailDate: TextView=binding.tvDetailTanggal
 
-        val dataStories =  intent.getParcelableExtra<DataStory>(EXTRA_DETAIL) as DataStory
+        val dataStories =  intent.getParcelableExtra<ListStoryItem>(EXTRA_DETAIL)
 
         Glide.with(imageView)
-            .load(dataStories.photoUrl)
+            .load(dataStories?.photoUrl)
             .into(imageView)
-        txtName.text = "Nama : "+ dataStories.name
-        txtDetailDeskripsi.text =  "Deskripsi : "+ dataStories.description
-        txtDetailDate.text= "Tanggal Dibuat : "+ dataStories.createdAt
+        txtName.text = "Nama : "+ dataStories?.name
+        txtDetailDeskripsi.text =  "Deskripsi : "+ dataStories?.description
+        txtDetailDate.text= "Tanggal Dibuat : "+ dataStories?.createdAt
 
     }
 

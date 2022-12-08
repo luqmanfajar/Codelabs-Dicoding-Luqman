@@ -14,9 +14,15 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModelProvider
 import com.luqmanfajar.story_app.api.ApiConfig
 import com.luqmanfajar.story_app.api.FileUploadResponse
 import com.luqmanfajar.story_app.createCustomTempFile
+import com.luqmanfajar.story_app.data.preference.LoginPreferences
+import com.luqmanfajar.story_app.data.preference.LoginViewModel
+import com.luqmanfajar.story_app.data.preference.ViewModelFactory
+import com.luqmanfajar.story_app.dataStore
 import com.luqmanfajar.story_app.databinding.ActivityAddStoryBinding
 import com.luqmanfajar.story_app.reduceFileImage
 import com.luqmanfajar.story_app.uriToFile
@@ -78,12 +84,22 @@ class AddStory : AppCompatActivity() {
                 REQUEST_CODE_PERMISSIONS
             )
         }
-        var tokenAuth = intent.getStringExtra(EXTRA_STORY).toString()
 
+        val pref = LoginPreferences.getInstance(dataStore)
+
+        val loginViewModel = ViewModelProvider(this, ViewModelFactory(pref)).get(
+            LoginViewModel::class.java
+        )
+        loginViewModel.getAuthKey().observe(this
+        ){
+                authToken : String ->
+
+            binding.buttonAdd.setOnClickListener{uploadImage(authToken)}
+        }
 
         binding.btnCamera.setOnClickListener{startTakePhoto()}
         binding.btnGallery.setOnClickListener{startGallery()}
-        binding.buttonAdd.setOnClickListener{uploadImage(tokenAuth)}
+//        binding.buttonAdd.setOnClickListener{uploadImage(tokenAuth)}
 
 
     }

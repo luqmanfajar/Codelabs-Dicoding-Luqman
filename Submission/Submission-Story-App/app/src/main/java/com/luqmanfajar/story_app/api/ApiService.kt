@@ -1,10 +1,12 @@
 package com.luqmanfajar.story_app.api
 
 import android.os.Parcelable
+import androidx.lifecycle.LiveData
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import com.luqmanfajar.story_app.BuildConfig
 import kotlinx.parcelize.Parcelize
-import kotlinx.parcelize.RawValue
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -55,7 +57,7 @@ data class LoginResult(
 @Parcelize
 data class StoriesResponse(
     @field:SerializedName("listStory")
-    val listStory: List<ListStoryItem>,
+    val listStory: List<ListStoryItem>? = emptyList(),
 
     @field:SerializedName("error")
     val error: Boolean,
@@ -90,6 +92,34 @@ data class ListStoryItem(
     val lat: Double
 ): Parcelable
 
+@Entity(tableName = "stories")
+data class StoriesResponseItem(
+
+    @PrimaryKey
+    @field:SerializedName("id")
+    val id: String,
+
+    @field:SerializedName("photoUrl")
+    val photoUrl: String,
+
+    @field:SerializedName("createdAt")
+    val createdAt: String,
+
+    @field:SerializedName("name")
+    val name: String,
+
+    @field:SerializedName("description")
+    val description: String,
+
+    @field:SerializedName("lon")
+    val lon: Double,
+
+    @field:SerializedName("lat")
+    val lat: Double
+)
+
+
+
 interface ApiService{
     @FormUrlEncoded
     @POST("/v1/register")
@@ -109,11 +139,18 @@ interface ApiService{
     ): Call<LoginResponse>
 
     @GET("/v1/stories")
-    fun getStories(
+    fun getStoriesLocation(
        @Query("page") page: Int,
        @Query("location") location: Int
 
     ): Call<StoriesResponse>
+
+    @GET("/v1/stories")
+    suspend fun tesGetStories(
+        @Header("Authorization") auth:String,
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ) : StoriesResponse
 
     @Multipart
     @POST("/v1/stories")
@@ -132,14 +169,14 @@ class ApiConfig {
                 .addInterceptor(loggingInterceptor)
                 .build()
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://story-api.dicoding.dev/")
+                .baseUrl("https://story-api.dicoding.dev/v1/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()
             return retrofit.create(ApiService::class.java)
         }
 
-    fun getApiService2(auth :String): ApiService {
+    fun getApiService2(auth: String): ApiService {
         val loggingInterceptor = if(BuildConfig.DEBUG) {
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
         } else {
