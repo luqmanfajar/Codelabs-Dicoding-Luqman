@@ -25,5 +25,6 @@
     <string name="txt_signUp">Inscribirse</string>
     <string name="txt_SignIn">Registrarse</string>
     <string name="valid_email">Debe ser un correo electrónico válido</string>
+    <string name="please_wait">Please Wait</string>
 
 </resources>

@@ -11,14 +11,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.luqmanfajar.story_app.api.ListStoryItem
-import com.luqmanfajar.story_app.api.StoriesResponseItem
-import com.luqmanfajar.story_app.data.DataStory
-import com.luqmanfajar.story_app.databinding.ActivityStoryBinding
 import com.luqmanfajar.story_app.databinding.ItemStoriesBinding
-import com.luqmanfajar.story_app.fitur.DetailStory
+import com.luqmanfajar.story_app.fitur.DetailStoryActivity
 
 
-class TesPagingAdapter : PagingDataAdapter<ListStoryItem, TesPagingAdapter.MyViewHolder>(DIFF_CALLBACK){
+class PagingAdapter : PagingDataAdapter<ListStoryItem, PagingAdapter.MyViewHolder>(DIFF_CALLBACK){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding = ItemStoriesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -43,8 +40,8 @@ class TesPagingAdapter : PagingDataAdapter<ListStoryItem, TesPagingAdapter.MyVie
             binding.tvItemDeskripsi.text = "Deskripsi : "+data.description
 
             binding.root.setOnClickListener{
-                val moveWithObjectIntent = Intent(itemView.context, DetailStory::class.java )
-                moveWithObjectIntent.putExtra(DetailStory.EXTRA_DETAIL, data)
+                val moveWithObjectIntent = Intent(itemView.context, DetailStoryActivity::class.java )
+                moveWithObjectIntent.putExtra(DetailStoryActivity.EXTRA_DETAIL, data)
                 val optionsCompat: ActivityOptionsCompat =
                     ActivityOptionsCompat.makeSceneTransitionAnimation(
                         itemView.context as Activity,

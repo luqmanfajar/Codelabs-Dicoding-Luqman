@@ -11,17 +11,22 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import com.luqmanfajar.story_app.api.ApiConfig
 import com.luqmanfajar.story_app.api.FileUploadResponse
 import com.luqmanfajar.story_app.createCustomTempFile
 import com.luqmanfajar.story_app.data.preference.LoginPreferences
-import com.luqmanfajar.story_app.data.preference.LoginViewModel
-import com.luqmanfajar.story_app.data.preference.ViewModelFactory
+import com.luqmanfajar.story_app.data.viewmodel.LoginViewModel
+import com.luqmanfajar.story_app.data.preference.PreferencesFactory
+
+import com.luqmanfajar.story_app.data.viewmodel.ViewModelFactory
+import com.luqmanfajar.story_app.data.viewmodel.tesAddStoryViewModel
+import com.luqmanfajar.story_app.data.viewmodel.tesRegisterViewModel
 import com.luqmanfajar.story_app.dataStore
 import com.luqmanfajar.story_app.databinding.ActivityAddStoryBinding
 import com.luqmanfajar.story_app.reduceFileImage
@@ -29,19 +34,30 @@ import com.luqmanfajar.story_app.uriToFile
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
+import com.luqmanfajar.story_app.utils.Result
+import com.luqmanfajar.story_app.utils.UiUtils
+import kotlinx.coroutines.flow.first
 
-class AddStory : AppCompatActivity() {
+class AddStoryActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddStoryBinding
     private lateinit var currentPhotoPath: String
 
+
+
     private var getFile: File? = null
+
+
+//    private val addStoryViewModel by viewModels<AddStoryViewModel> {
+//        ViewModelFactory.getInstance(this)
+//    }
 
     companion object {
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
@@ -85,21 +101,21 @@ class AddStory : AppCompatActivity() {
             )
         }
 
-        val pref = LoginPreferences.getInstance(dataStore)
+        val auth = intent.getStringExtra(EXTRA_STORY).toString()
+//        getAuth()
 
-        val loginViewModel = ViewModelProvider(this, ViewModelFactory(pref)).get(
-            LoginViewModel::class.java
-        )
-        loginViewModel.getAuthKey().observe(this
-        ){
-                authToken : String ->
-
-            binding.buttonAdd.setOnClickListener{uploadImage(authToken)}
-        }
+//
+//        loginViewModel.getAuthKey().observe(this
+//        ){
+//                authToken : String ->
+//
+//
+//        }
+        binding.buttonAdd.setOnClickListener{uploadImage(auth)}
 
         binding.btnCamera.setOnClickListener{startTakePhoto()}
         binding.btnGallery.setOnClickListener{startGallery()}
-//        binding.buttonAdd.setOnClickListener{uploadImage(tokenAuth)}
+//        binding.buttonAdd.setOnClickListener{uploadImage()}
 
 
     }
@@ -117,7 +133,7 @@ class AddStory : AppCompatActivity() {
 
         createCustomTempFile(application).also {
             val photoURI: Uri = FileProvider.getUriForFile(
-                this@AddStory,
+                this@AddStoryActivity,
                 "com.luqmanfajar.story_app",
                 it
             )
@@ -133,7 +149,7 @@ class AddStory : AppCompatActivity() {
         if (result.resultCode == RESULT_OK) {
             val selectedImg: Uri = result.data?.data as Uri
 
-            val myFile = uriToFile(selectedImg, this@AddStory)
+            val myFile = uriToFile(selectedImg, this@AddStoryActivity)
 
             getFile = myFile
 
@@ -153,8 +169,11 @@ class AddStory : AppCompatActivity() {
         }
     }
 
-    private fun uploadImage(tokenAuth: String){
-        if (getFile != null){
+
+
+    private fun uploadImage(auth:String) {
+        val addStoryViewModel = ViewModelProvider(this).get(tesAddStoryViewModel::class.java)
+        if (getFile != null) {
             val file = reduceFileImage(getFile as File)
 
             val txtDesc = binding.edAddDescription.text.toString()
@@ -166,30 +185,49 @@ class AddStory : AppCompatActivity() {
                 requestImageFile
             )
 
-            val service = ApiConfig().getApiService2(tokenAuth).uploadImage(imageMultipart,description)
+            addStoryViewModel.uploadStory(auth,imageMultipart,description)
+            addStoryViewModel.addStory.observe(this) { uploadResponse ->
+                if (uploadResponse.error){
+                    Toast.makeText(this@AddStoryActivity, "Upload Gagal : "+uploadResponse.message, Toast.LENGTH_SHORT).show()
+                } else{
+                    val i = Intent(this@AddStoryActivity, StoryActivity::class.java)
+                    startActivity(i,
+                        ActivityOptionsCompat.makeSceneTransitionAnimation(this@AddStoryActivity).toBundle())
 
-            service.enqueue(object : Callback<FileUploadResponse> {
-                override fun onResponse(
-                    call: Call<FileUploadResponse>,
-                    response: Response<FileUploadResponse>
-                ) {
-                    if (response.isSuccessful) {
-                        val responseBody = response.body()
-                        if (responseBody != null && !responseBody.error) {
-                            Toast.makeText(this@AddStory, "Upload Sukses : "+responseBody.message, Toast.LENGTH_SHORT).show()
-                            finish()
-                        }
-                    } else {
-                        Toast.makeText(this@AddStory, "Upload Gagal : "+response.message(), Toast.LENGTH_SHORT).show()
-                    }
+                    Toast.makeText(this@AddStoryActivity, "Register Sukses", Toast.LENGTH_SHORT).show()
+                    finish()
                 }
-                override fun onFailure(call: Call<FileUploadResponse>, t: Throwable) {
-                    Toast.makeText(this@AddStory, "Gagal instance Retrofit", Toast.LENGTH_SHORT).show()
-                }
-            })
-        }else {
-            Toast.makeText(this@AddStory, "Silakan masukkan berkas gambar terlebih dahulu.", Toast.LENGTH_SHORT).show()
+
+            }
+
+//            val service = ApiConfig().getApiService2(tokenAuth).uploadImage(imageMultipart,description)
+//
+//            service.enqueue(object : Callback<FileUploadResponse> {
+//                override fun onResponse(
+//                    call: Call<FileUploadResponse>,
+//                    response: Response<FileUploadResponse>
+//                ) {
+//                    if (response.isSuccessful) {
+//                        val responseBody = response.body()
+//                        if (responseBody != null && !responseBody.error) {
+//                            Toast.makeText(this@AddStoryActivity, "Upload Sukses : "+responseBody.message, Toast.LENGTH_SHORT).show()
+//                            finish()
+//                        }
+//                    } else {
+//                        Toast.makeText(this@AddStoryActivity, "Upload Gagal : "+response.message(), Toast.LENGTH_SHORT).show()
+//                    }
+//                }
+//                override fun onFailure(call: Call<FileUploadResponse>, t: Throwable) {
+//                    Toast.makeText(this@AddStoryActivity, "Gagal instance Retrofit", Toast.LENGTH_SHORT).show()
+//                }
+//            })
+//        }else {
+//            Toast.makeText(this@AddStoryActivity, "Silakan masukkan berkas gambar terlebih dahulu.", Toast.LENGTH_SHORT).show()
+//        }
+        }
+        else {
+            Toast.makeText(this@AddStoryActivity, "Silakan masukkan berkas gambar terlebih dahulu.", Toast.LENGTH_SHORT).show()
         }
     }
-
 }
+

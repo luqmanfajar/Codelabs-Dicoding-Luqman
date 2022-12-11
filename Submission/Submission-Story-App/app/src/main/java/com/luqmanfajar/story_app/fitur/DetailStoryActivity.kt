@@ -6,10 +6,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.luqmanfajar.story_app.api.ListStoryItem
-import com.luqmanfajar.story_app.data.DataStory
 import com.luqmanfajar.story_app.databinding.ActivityDetailStoryBinding
 
-class DetailStory : AppCompatActivity() {
+class DetailStoryActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailStoryBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,6 +18,10 @@ class DetailStory : AppCompatActivity() {
 
         supportActionBar?.title = "Detail Story"
 
+        setDetailStory()
+    }
+
+    private fun setDetailStory(){
         val imageView: ImageView = binding.ivDetailPhoto
         val txtName: TextView = binding.tvDetailName
         val txtDetailDeskripsi: TextView =binding.tvDetailDescription
@@ -32,7 +35,6 @@ class DetailStory : AppCompatActivity() {
         txtName.text = "Nama : "+ dataStories?.name
         txtDetailDeskripsi.text =  "Deskripsi : "+ dataStories?.description
         txtDetailDate.text= "Tanggal Dibuat : "+ dataStories?.createdAt
-
     }
 
 

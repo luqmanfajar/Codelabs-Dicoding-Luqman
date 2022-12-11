@@ -54,35 +54,35 @@
             android:exported="false"
             android:label="@string/title_activity_maps" />
         <activity
-            android:name=".fitur.AddStory"
+            android:name=".fitur.AddStoryActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".fitur.DetailStory"
+            android:name=".fitur.DetailStoryActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".fitur.Login"
+            android:name=".fitur.LoginActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".fitur.Story"
+            android:name=".fitur.StoryActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".fitur.Register"
+            android:name=".fitur.RegisterActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

@@ -11,9 +11,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.asFlow
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -27,8 +25,8 @@ import com.luqmanfajar.story_app.api.ApiConfig
 import com.luqmanfajar.story_app.api.ListStoryItem
 import com.luqmanfajar.story_app.api.StoriesResponse
 import com.luqmanfajar.story_app.data.preference.LoginPreferences
-import com.luqmanfajar.story_app.data.preference.LoginViewModel
-import com.luqmanfajar.story_app.data.preference.ViewModelFactory
+import com.luqmanfajar.story_app.data.viewmodel.LoginViewModel
+import com.luqmanfajar.story_app.data.preference.PreferencesFactory
 import com.luqmanfajar.story_app.dataStore
 import com.luqmanfajar.story_app.databinding.ActivityMapsBinding
 import retrofit2.Call
@@ -159,12 +157,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         val pref = LoginPreferences.getInstance(dataStore)
 
-        val loginViewModel = ViewModelProvider(this, ViewModelFactory(pref)).get(
+        val loginViewModel = ViewModelProvider(this, PreferencesFactory(pref)).get(
             LoginViewModel::class.java
         )
 
-//        var tokenAuth = loginViewModel.getAuthKey()
-//        var tokenAuth = intent.getStringExtra(EXTRA_MAP).toString()
         mMap = googleMap
 
         mMap.uiSettings.isZoomControlsEnabled = true
@@ -177,7 +173,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
             getAllStories(authToken!!)
         }
-//        getAllStories(tokenAuth)
         getMyLocation()
 
     }

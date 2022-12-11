@@ -1,15 +1,22 @@
 package com.luqmanfajar.story_app.data.preference
 
+import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
+import com.luqmanfajar.story_app.api.ApiConfig
+import com.luqmanfajar.story_app.api.LoginResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class LoginPreferences private constructor(private val dataStore: DataStore<Preferences>){
 
     private val LOGIN_KEY = booleanPreferencesKey("isLogin")
     private val AUTH_KEY = stringPreferencesKey("authToken")
+
 
     fun getLoginStatus(): Flow<Boolean> {
         return dataStore.data.map { preferences ->
@@ -51,31 +58,3 @@ class LoginPreferences private constructor(private val dataStore: DataStore<Pref
         }
     }
 }
-
-
-//internal class LoginPreferences (context: Context){
-//    companion object{
-//        private const val PREFS_NAME = "user_pref"
-//        private const val TOKEN = "authToken"
-//        private const val LOGIN = "isLogin"
-//    }
-//
-//    private val preferences = context.getSharedPreferences(PREFS_NAME,Context.MODE_PRIVATE)
-//
-//    fun setData(value: LoginModel){
-//        val editor = preferences.edit()
-//        editor.putString(TOKEN, value.authToken)
-//        editor.putBoolean(LOGIN, value.isLogin)
-//        editor.apply()
-//    }
-//
-//    fun getLogin(): LoginModel{
-//        val model = LoginModel()
-//        model.authToken = preferences.getString(TOKEN, "")
-//        model.isLogin = preferences.getBoolean(LOGIN, false)
-//        return model
-//    }
-//
-//
-//
-//}

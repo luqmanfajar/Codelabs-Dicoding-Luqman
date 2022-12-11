@@ -118,6 +118,12 @@ data class StoriesResponseItem(
     val lat: Double
 )
 
+data class Response(
+    @field:SerializedName("error")
+    val error: Boolean,
+    @field:SerializedName("message")
+    val message: String
+)
 
 
 interface ApiService{
@@ -158,7 +164,6 @@ interface ApiService{
         @Part file: MultipartBody.Part,
         @Part("description") description: RequestBody,
     ): Call<FileUploadResponse>
-
 }
 
 class ApiConfig {

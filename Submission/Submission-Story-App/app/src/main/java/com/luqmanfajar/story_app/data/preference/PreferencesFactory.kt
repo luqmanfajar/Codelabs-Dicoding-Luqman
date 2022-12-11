@@ -1,12 +1,11 @@
 package com.luqmanfajar.story_app.data.preference
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.luqmanfajar.story_app.data.paging.StoriesRepository
+import com.luqmanfajar.story_app.data.viewmodel.LoginViewModel
 import java.lang.IllegalArgumentException
 
-class ViewModelFactory(private val pref: LoginPreferences): ViewModelProvider.NewInstanceFactory() {
+class PreferencesFactory(private val pref: LoginPreferences): ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -15,4 +14,5 @@ class ViewModelFactory(private val pref: LoginPreferences): ViewModelProvider.Ne
         }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }
+
 }

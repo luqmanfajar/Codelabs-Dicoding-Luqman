@@ -24,4 +24,5 @@
     <string name="txt_signUp">Daftar</string>
     <string name="txt_SignIn">Masuk</string>
     <string name="valid_email">Diharuskan email yang valid</string>
+    <string name="please_wait">Please Wait</string>
 </resources>
