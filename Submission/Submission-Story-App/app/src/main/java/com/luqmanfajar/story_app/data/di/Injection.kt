@@ -7,14 +7,14 @@ import androidx.datastore.preferences.preferencesDataStore
 import com.luqmanfajar.story_app.api.ApiConfig
 
 import com.luqmanfajar.story_app.data.preference.LoginPreferences
-import com.luqmanfajar.story_app.data.repository.tesRepository
+import com.luqmanfajar.story_app.data.repository.Repository
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 object Injection {
-    fun provideRepository(context: Context): tesRepository {
+    fun provideRepository(context: Context): Repository {
         val preferences = LoginPreferences.getInstance(context.dataStore)
         val apiService = ApiConfig().getApiService()
 
-        return tesRepository(apiService,preferences)
+        return Repository(apiService,preferences)
     }
 }

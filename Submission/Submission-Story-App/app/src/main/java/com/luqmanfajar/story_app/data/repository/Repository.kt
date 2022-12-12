@@ -29,14 +29,14 @@ class Repository(
         }
     }
 
-    fun register(
+    fun getRegister(
         name: String,
         email: String,
         password: String
     ): LiveData<Result<RegisterResponse>> = liveData {
         emit(Result.Loading)
         try {
-            val data = apiService.tescreateUser(name, email, password)
+            val data = apiService.createUser(name, email, password)
             emit(Result.Success(data))
         } catch (e: Exception) {
             when (e) {
@@ -63,10 +63,10 @@ class Repository(
 
     }
 
-    fun login(email: String, password: String): LiveData<Result<LoginResponse>> = liveData {
+    fun getLogin(email: String, password: String): LiveData<Result<LoginResponse>> = liveData {
         emit(Result.Loading)
         try {
-            val data = apiService.tesloginUser(email, password)
+            val data = apiService.loginUser(email, password)
             emit(Result.Success(data))
         } catch (e: Exception) {
             when (e) {
@@ -103,14 +103,14 @@ class Repository(
         ).liveData
         }
 
-    fun uploadStories(
+    fun getUploadStories(
         auth:String,
         file: MultipartBody.Part,
         description: RequestBody
     ): LiveData<Result<FileUploadResponse>> = liveData {
         emit(Result.Loading)
         try {
-            val data = apiService.tesUploadStories(auth,file, description)
+            val data = apiService.UploadStories(auth,file, description)
             emit(Result.Success(data))
         } catch (e: Exception) {
             emit(Result.Error(e.toString()))

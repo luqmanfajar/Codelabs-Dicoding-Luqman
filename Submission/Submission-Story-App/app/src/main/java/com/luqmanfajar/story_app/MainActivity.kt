@@ -11,11 +11,11 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.luqmanfajar.story_app.data.preference.LoginPreferences
-import com.luqmanfajar.story_app.data.viewmodel.LoginViewModel
+import com.luqmanfajar.story_app.data.viewmodel.AuthViewModel
 import com.luqmanfajar.story_app.data.preference.PreferencesFactory
 import com.luqmanfajar.story_app.databinding.ActivityMainBinding
-import com.luqmanfajar.story_app.fitur.LoginActivity
-import com.luqmanfajar.story_app.fitur.StoryActivity
+import com.luqmanfajar.story_app.ui.login.LoginActivity
+import com.luqmanfajar.story_app.ui.story.StoryActivity
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         val pref = LoginPreferences.getInstance(dataStore)
 
         val loginViewModel = ViewModelProvider(this, PreferencesFactory(pref)).get(
-            LoginViewModel::class.java
+            AuthViewModel::class.java
         )
 
         loginViewModel.getLoginStatus().observe(this

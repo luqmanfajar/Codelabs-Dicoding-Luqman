@@ -5,6 +5,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.luqmanfajar.story_app.data.di.Injection
 import com.luqmanfajar.story_app.data.repository.Repository
+import com.luqmanfajar.story_app.ui.add_story.AddStoryViewModel
+import com.luqmanfajar.story_app.ui.login.LoginViewModel
+import com.luqmanfajar.story_app.ui.map.MapViewModel
+import com.luqmanfajar.story_app.ui.register.RegisterViewModel
+import com.luqmanfajar.story_app.ui.story.StoriesViewModel
 
 class ViewModelFactory private constructor(
     private val repository: Repository
@@ -21,20 +26,20 @@ class ViewModelFactory private constructor(
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
-            modelClass.isAssignableFrom(tesLoginRepository::class.java) -> {
-                tesLoginRepository(repository) as T
+            modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
+                LoginViewModel(repository) as T
             }
-            modelClass.isAssignableFrom(tesStoryViewModel::class.java) -> {
-                tesStoryViewModel(repository) as T
+            modelClass.isAssignableFrom(StoriesViewModel::class.java) -> {
+                StoriesViewModel(repository) as T
             }
-            modelClass.isAssignableFrom(tesRegisterRepoModel::class.java) -> {
-                tesRegisterRepoModel(repository) as T
+            modelClass.isAssignableFrom(RegisterViewModel::class.java) -> {
+                RegisterViewModel(repository) as T
             }
-            modelClass.isAssignableFrom(tesAddStoryRepoModel::class.java) -> {
-                tesAddStoryRepoModel(repository) as T
+            modelClass.isAssignableFrom(AddStoryViewModel::class.java) -> {
+                AddStoryViewModel(repository) as T
             }
-            modelClass.isAssignableFrom(tesMapViewModel::class.java) -> {
-                tesMapViewModel(repository) as T
+            modelClass.isAssignableFrom(MapViewModel::class.java) -> {
+                MapViewModel(repository) as T
             }
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }

@@ -1,4 +1,4 @@
-package com.luqmanfajar.story_app.data.viewmodel
+package com.luqmanfajar.story_app.ui.story
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -8,7 +8,7 @@ import androidx.paging.cachedIn
 import com.luqmanfajar.story_app.api.ListStoryItem
 import com.luqmanfajar.story_app.data.repository.Repository
 
-class tesStoryViewModel(private val repository: Repository) : ViewModel() {
+class StoriesViewModel(private val repository: Repository) : ViewModel() {
     val getStory: LiveData<PagingData<ListStoryItem>> =
         repository.getStories().cachedIn(viewModelScope)
 }

@@ -50,39 +50,39 @@
             android:value="AIzaSyARL_aR6MJuzHJEyrqowrFPYPBcj8lkgVY" />
 
         <activity
-            android:name=".map.MapsActivity"
+            android:name=".ui.map.MapsActivity"
             android:exported="false"
             android:label="@string/title_activity_maps" />
         <activity
-            android:name=".fitur.AddStoryActivity"
+            android:name=".ui.add_story.AddStoryActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".fitur.DetailStoryActivity"
+            android:name=".ui.detail_story.DetailStoryActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".fitur.LoginActivity"
+            android:name=".ui.login.LoginActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".fitur.StoryActivity"
+            android:name=".ui.story.StoryActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".fitur.RegisterActivity"
+            android:name=".ui.register.RegisterActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

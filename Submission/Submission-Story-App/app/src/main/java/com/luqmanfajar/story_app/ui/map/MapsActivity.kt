@@ -1,4 +1,4 @@
-package com.luqmanfajar.story_app.map
+package com.luqmanfajar.story_app.ui.map
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -22,19 +22,14 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import com.luqmanfajar.story_app.R
-import com.luqmanfajar.story_app.api.ApiConfig
 import com.luqmanfajar.story_app.api.ListStoryItem
-import com.luqmanfajar.story_app.api.StoriesResponse
 import com.luqmanfajar.story_app.data.preference.LoginPreferences
-import com.luqmanfajar.story_app.data.viewmodel.LoginViewModel
+import com.luqmanfajar.story_app.data.viewmodel.AuthViewModel
 import com.luqmanfajar.story_app.data.preference.PreferencesFactory
 import com.luqmanfajar.story_app.data.viewmodel.ViewModelFactory
-import com.luqmanfajar.story_app.data.viewmodel.tesMapViewModel
 import com.luqmanfajar.story_app.dataStore
 import com.luqmanfajar.story_app.databinding.ActivityMapsBinding
 import com.luqmanfajar.story_app.utils.Result
-import retrofit2.Call
-import retrofit2.Response
 import java.io.IOException
 import java.util.*
 import kotlin.collections.ArrayList
@@ -45,7 +40,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var binding: ActivityMapsBinding
     private val boundsBuilder = LatLngBounds.builder()
 
-    private val viewModel by viewModels<tesMapViewModel> {
+    private val viewModel by viewModels<MapViewModel> {
         ViewModelFactory.getInstance(this)
     }
 
@@ -92,7 +87,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private fun tesGetLocationStories(auth:String){
+    private fun GetLocationStories(auth:String){
         viewModel.getLocation(auth).observe(this){result->
             when(result){
                 is Result.Loading -> {
@@ -155,7 +150,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val pref = LoginPreferences.getInstance(dataStore)
 
         val loginViewModel = ViewModelProvider(this, PreferencesFactory(pref)).get(
-            LoginViewModel::class.java
+            AuthViewModel::class.java
         )
 
         mMap = googleMap
@@ -169,7 +164,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 authToken : String ->
             val auth = "Bearer $authToken"
 
-            tesGetLocationStories(auth)
+            GetLocationStories(auth)
         }
         getMyLocation()
 
@@ -196,7 +191,5 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    companion object {
-        const val EXTRA_MAP = "extra_token"
-    }
+
 }

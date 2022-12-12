@@ -1,4 +1,4 @@
-package com.luqmanfajar.story_app.fitur
+package com.luqmanfajar.story_app.ui.add_story
 
 import android.Manifest
 import android.content.Intent
@@ -17,8 +17,6 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
-import com.luqmanfajar.story_app.api.ApiConfig
-import com.luqmanfajar.story_app.api.FileUploadResponse
 import com.luqmanfajar.story_app.createCustomTempFile
 import com.luqmanfajar.story_app.data.preference.LoginPreferences
 import com.luqmanfajar.story_app.data.preference.PreferencesFactory
@@ -27,20 +25,16 @@ import com.luqmanfajar.story_app.data.viewmodel.*
 import com.luqmanfajar.story_app.dataStore
 import com.luqmanfajar.story_app.databinding.ActivityAddStoryBinding
 import com.luqmanfajar.story_app.reduceFileImage
+import com.luqmanfajar.story_app.ui.story.StoryActivity
 import com.luqmanfajar.story_app.uriToFile
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.io.File
 import com.luqmanfajar.story_app.utils.Result
 import com.luqmanfajar.story_app.utils.UiUtils
-import kotlinx.coroutines.flow.first
 
 class AddStoryActivity : AppCompatActivity() {
 
@@ -51,13 +45,9 @@ class AddStoryActivity : AppCompatActivity() {
 
     private var getFile: File? = null
 
-    private val viewModel by viewModels<tesAddStoryRepoModel> {
+    private val viewModel by viewModels<AddStoryViewModel> {
         ViewModelFactory.getInstance(this)
     }
-
-//    private val addStoryViewModel by viewModels<AddStoryViewModel> {
-//        ViewModelFactory.getInstance(this)
-//    }
 
     companion object {
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
@@ -103,7 +93,7 @@ class AddStoryActivity : AppCompatActivity() {
         val pref = LoginPreferences.getInstance(dataStore)
 
         val loginViewModel = ViewModelProvider(this, PreferencesFactory(pref)).get(
-            LoginViewModel::class.java
+            AuthViewModel::class.java
         )
 
         loginViewModel.getAuthKey().observe(this
@@ -114,9 +104,6 @@ class AddStoryActivity : AppCompatActivity() {
             binding.buttonAdd.setOnClickListener{uploadStories(auth)}
 
         }
-
-
-//        val auth = intent.getStringExtra(EXTRA_STORY).toString()
 
 
         binding.btnCamera.setOnClickListener{startTakePhoto()}
@@ -213,48 +200,10 @@ class AddStoryActivity : AppCompatActivity() {
             }
         else {
             Toast.makeText(this@AddStoryActivity, "Silakan masukkan berkas gambar terlebih dahulu.", Toast.LENGTH_SHORT).show()
-        }
+            }
 
         }
 
     }
-
-
-//
-//    private fun uploadImage(auth: String) {
-//        val addStoryViewModel = ViewModelProvider(this).get(tesAddStoryViewModel::class.java)
-//        if (getFile != null) {
-//            val file = reduceFileImage(getFile as File)
-//
-//            val txtDesc = binding.edAddDescription.text.toString()
-//            val description = txtDesc.toRequestBody("text/plain".toMediaType())
-//            val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
-//            val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
-//                "photo",
-//                file.name,
-//                requestImageFile
-//            )
-//
-//            addStoryViewModel.uploadStory(auth,imageMultipart,description)
-//            addStoryViewModel.addStory.observe(this) { uploadResponse ->
-//                if (uploadResponse.error){
-//                    Toast.makeText(this@AddStoryActivity, "Upload Gagal : "+uploadResponse.message, Toast.LENGTH_SHORT).show()
-//                } else{
-//                    val i = Intent(this@AddStoryActivity, StoryActivity::class.java)
-//                    startActivity(i,
-//                        ActivityOptionsCompat.makeSceneTransitionAnimation(this@AddStoryActivity).toBundle())
-//
-//                    Toast.makeText(this@AddStoryActivity, "Upload Story Sukses", Toast.LENGTH_SHORT).show()
-//                    finish()
-//                }
-//
-//            }
-//
-//        }
-//        else {
-//            Toast.makeText(this@AddStoryActivity, "Silakan masukkan berkas gambar terlebih dahulu.", Toast.LENGTH_SHORT).show()
-//        }
-//    }
-//    }
 
 

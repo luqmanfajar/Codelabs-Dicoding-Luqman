@@ -59,6 +59,8 @@ dependencies {
     implementation 'androidx.activity:activity-ktx:1.4.0'
     implementation "androidx.paging:paging-runtime-ktx:3.1.0"
     implementation 'androidx.room:room-ktx:2.4.0-rc01'
+    androidTestImplementation 'org.junit.jupiter:junit-jupiter'
+    androidTestImplementation 'org.junit.jupiter:junit-jupiter'
     kapt 'androidx.room:room-compiler:2.4.0-rc01'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

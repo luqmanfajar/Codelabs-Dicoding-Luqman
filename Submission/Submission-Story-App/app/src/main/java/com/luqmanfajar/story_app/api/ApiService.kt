@@ -1,23 +1,18 @@
 package com.luqmanfajar.story_app.api
 
 import android.os.Parcelable
-import androidx.lifecycle.LiveData
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
-import com.luqmanfajar.story_app.BuildConfig
 import kotlinx.parcelize.Parcelize
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
-import okhttp3.Request
 import okhttp3.RequestBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
-
-
 
 data class FileUploadResponse(
     @field:SerializedName("error")
@@ -141,19 +136,10 @@ data class Response(
 
 
 interface ApiService{
-    @FormUrlEncoded
-    @POST("/v1/register")
-    fun createUser(
-
-        @Field("name") name: String,
-        @Field("email") email: String,
-        @Field("password") password: String,
-
-    ): Call<RegisterResponse>
 
     @FormUrlEncoded
     @POST("/v1/register")
-    suspend fun tescreateUser(
+    suspend fun createUser(
 
         @Field("name") name: String,
         @Field("email") email: String,
@@ -161,16 +147,11 @@ interface ApiService{
 
         ): RegisterResponse
 
-    @FormUrlEncoded
-    @POST("/v1/login")
-    fun loginUser(
-        @Field("email") email: String,
-        @Field("password") password: String,
-    ): Call<LoginResponse>
+
 
     @FormUrlEncoded
     @POST("/v1/login")
-    suspend fun tesloginUser(
+    suspend fun loginUser(
         @Field("email") email: String,
         @Field("password") password: String,
     ): LoginResponse
@@ -183,7 +164,7 @@ interface ApiService{
     ): Call<StoriesResponse>
 
     @GET("/v1/stories")
-    suspend fun tesGetStories(
+    suspend fun GetStories(
         @Header("Authorization") auth:String,
         @Query("page") page: Int,
         @Query("size") size: Int
@@ -191,7 +172,7 @@ interface ApiService{
 
     @Multipart
     @POST("/v1/stories")
-    suspend fun tesUploadStories(
+    suspend fun UploadStories(
         @Header("Authorization") auth:String,
         @Part file: MultipartBody.Part,
         @Part("description") description: RequestBody,
@@ -204,12 +185,6 @@ interface ApiService{
 
     ): LocationResponse
 
-    @Multipart
-    @POST("/v1/stories")
-    fun uploadImage(
-        @Part file: MultipartBody.Part,
-        @Part("description") description: RequestBody,
-    ): Call<FileUploadResponse>
 }
 
 class ApiConfig {
@@ -226,28 +201,6 @@ class ApiConfig {
                 .build()
             return retrofit.create(ApiService::class.java)
         }
-
-    fun getApiService2(auth: String): ApiService {
-        val loggingInterceptor = if(BuildConfig.DEBUG) {
-            HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-        } else {
-            HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE)
-        }
-        val builder = OkHttpClient.Builder()
-        builder.addInterceptor { chain ->
-            val request: Request =
-                chain.request().newBuilder().addHeader("Authorization", "Bearer "+auth).build()
-            chain.proceed(request)
-        }
-        builder.addInterceptor(loggingInterceptor).build()
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://story-api.dicoding.dev/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(builder.build())
-            .build()
-        return retrofit.create(ApiService::class.java)
-    }
-
 
     }
 

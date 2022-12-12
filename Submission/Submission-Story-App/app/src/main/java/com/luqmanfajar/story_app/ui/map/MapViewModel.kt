@@ -1,9 +1,9 @@
-package com.luqmanfajar.story_app.data.viewmodel
+package com.luqmanfajar.story_app.ui.map
 
 import androidx.lifecycle.ViewModel
 import com.luqmanfajar.story_app.data.repository.Repository
 
 
-class tesMapViewModel(private val repository: Repository) : ViewModel() {
+class MapViewModel(private val repository: Repository) : ViewModel() {
     fun getLocation(auth:String) = repository.getLocation(auth)
 }

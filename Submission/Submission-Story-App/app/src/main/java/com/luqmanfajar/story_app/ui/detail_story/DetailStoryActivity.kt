@@ -1,4 +1,4 @@
-package com.luqmanfajar.story_app.fitur
+package com.luqmanfajar.story_app.ui.detail_story
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

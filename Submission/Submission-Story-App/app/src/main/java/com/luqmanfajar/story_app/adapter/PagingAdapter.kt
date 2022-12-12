@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.luqmanfajar.story_app.api.ListStoryItem
 import com.luqmanfajar.story_app.databinding.ItemStoriesBinding
-import com.luqmanfajar.story_app.fitur.DetailStoryActivity
+import com.luqmanfajar.story_app.ui.detail_story.DetailStoryActivity
 
 
 class PagingAdapter : PagingDataAdapter<ListStoryItem, PagingAdapter.MyViewHolder>(DIFF_CALLBACK){

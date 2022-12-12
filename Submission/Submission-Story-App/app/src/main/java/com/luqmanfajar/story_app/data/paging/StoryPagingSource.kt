@@ -25,7 +25,7 @@ class StoryPagingSource(private val apiService: ApiService,private val preferenc
         return try {
             val page = params.key ?: INITIAL_PAGE_INDEX
             val auth = "Bearer "+preferences.getAuthKey().first().toString()
-            val responseData = apiService.tesGetStories(auth,page,params.loadSize)
+            val responseData = apiService.GetStories(auth,page,params.loadSize)
             val listStoryItem = responseData.listStory?: emptyList()
 
             LoadResult.Page(
