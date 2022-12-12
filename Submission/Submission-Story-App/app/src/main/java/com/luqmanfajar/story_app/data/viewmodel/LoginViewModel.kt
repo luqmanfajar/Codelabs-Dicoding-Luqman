@@ -6,7 +6,6 @@ import com.luqmanfajar.story_app.api.ApiConfig
 import com.luqmanfajar.story_app.api.LoginResponse
 import com.luqmanfajar.story_app.api.LoginResult
 import com.luqmanfajar.story_app.data.preference.LoginPreferences
-import com.luqmanfajar.story_app.data.repository.StoriesRepository
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Response

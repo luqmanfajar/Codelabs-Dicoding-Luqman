@@ -21,10 +21,14 @@ import com.luqmanfajar.story_app.data.paging.StoryViewModel
 import com.luqmanfajar.story_app.data.preference.LoginPreferences
 import com.luqmanfajar.story_app.data.viewmodel.LoginViewModel
 import com.luqmanfajar.story_app.data.preference.PreferencesFactory
+import com.luqmanfajar.story_app.data.viewmodel.ViewModelFactory
 import com.luqmanfajar.story_app.data.viewmodel.tesLoginModel
+import com.luqmanfajar.story_app.data.viewmodel.tesLoginRepository
 import com.luqmanfajar.story_app.dataStore
 import com.luqmanfajar.story_app.databinding.ActivityLoginBinding
 import com.luqmanfajar.story_app.fitur.AddStoryActivity.Companion.EXTRA_STORY
+import com.luqmanfajar.story_app.utils.Result
+import com.luqmanfajar.story_app.utils.UiUtils
 import retrofit2.Call
 import retrofit2.Response
 
@@ -35,6 +39,10 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var customEmail: EmailValidate
 
     private lateinit var binding: ActivityLoginBinding
+
+    private val viewModel by viewModels<tesLoginRepository> {
+        ViewModelFactory.getInstance(this)
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,14 +57,51 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         customButton = binding.btnLogin
 
 
+
         binding.btnLogin.setOnClickListener{
-            Login()
+            teslogin()
         }
         binding.txtMoveRegister.setOnClickListener{
             val i = Intent(this, RegisterActivity::class.java)
             startActivity(i,ActivityOptionsCompat.makeSceneTransitionAnimation(this@LoginActivity).toBundle())
         }
 
+    }
+
+    private fun teslogin() {
+        var email = binding.edLoginEmail.text.toString()
+        var password = binding.edLoginPassword.text.toString()
+        viewModel.login(email, password).observe(this) { result ->
+            when (result) {
+                is Result.Loading -> {
+                    binding.btnLogin.isEnabled = false
+                    UiUtils.show(this)
+                }
+                is Result.Success -> {
+                    UiUtils.close()
+                    binding.btnLogin.isEnabled = true
+                    result.data.let {
+                        if (!it.error) {
+                            saveSession(it.loginResult.token)
+                            message(it.message)
+                            startActivity(Intent(this@LoginActivity, StoryActivity::class.java))
+                            finish()
+                        } else {
+                            message(it.message)
+                        }
+                    }
+                }
+                is Result.Error -> {
+                    UiUtils.close()
+                    binding.btnLogin.isEnabled = true
+                    message(result.error)
+                }
+            }
+
+        }
+    }
+    private fun message(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     private fun Login() {

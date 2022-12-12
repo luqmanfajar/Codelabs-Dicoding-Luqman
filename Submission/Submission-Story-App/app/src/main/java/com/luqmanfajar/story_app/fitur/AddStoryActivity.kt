@@ -21,12 +21,9 @@ import com.luqmanfajar.story_app.api.ApiConfig
 import com.luqmanfajar.story_app.api.FileUploadResponse
 import com.luqmanfajar.story_app.createCustomTempFile
 import com.luqmanfajar.story_app.data.preference.LoginPreferences
-import com.luqmanfajar.story_app.data.viewmodel.LoginViewModel
 import com.luqmanfajar.story_app.data.preference.PreferencesFactory
+import com.luqmanfajar.story_app.data.viewmodel.*
 
-import com.luqmanfajar.story_app.data.viewmodel.ViewModelFactory
-import com.luqmanfajar.story_app.data.viewmodel.tesAddStoryViewModel
-import com.luqmanfajar.story_app.data.viewmodel.tesRegisterViewModel
 import com.luqmanfajar.story_app.dataStore
 import com.luqmanfajar.story_app.databinding.ActivityAddStoryBinding
 import com.luqmanfajar.story_app.reduceFileImage
@@ -54,6 +51,9 @@ class AddStoryActivity : AppCompatActivity() {
 
     private var getFile: File? = null
 
+    private val viewModel by viewModels<tesAddStoryRepoModel> {
+        ViewModelFactory.getInstance(this)
+    }
 
 //    private val addStoryViewModel by viewModels<AddStoryViewModel> {
 //        ViewModelFactory.getInstance(this)
@@ -100,22 +100,27 @@ class AddStoryActivity : AppCompatActivity() {
                 REQUEST_CODE_PERMISSIONS
             )
         }
+        val pref = LoginPreferences.getInstance(dataStore)
 
-        val auth = intent.getStringExtra(EXTRA_STORY).toString()
-//        getAuth()
+        val loginViewModel = ViewModelProvider(this, PreferencesFactory(pref)).get(
+            LoginViewModel::class.java
+        )
 
-//
-//        loginViewModel.getAuthKey().observe(this
-//        ){
-//                authToken : String ->
-//
-//
-//        }
-        binding.buttonAdd.setOnClickListener{uploadImage(auth)}
+        loginViewModel.getAuthKey().observe(this
+        ){
+                authToken : String ->
+            val auth = "Bearer $authToken"
+
+            binding.buttonAdd.setOnClickListener{uploadStories(auth)}
+
+        }
+
+
+//        val auth = intent.getStringExtra(EXTRA_STORY).toString()
+
 
         binding.btnCamera.setOnClickListener{startTakePhoto()}
         binding.btnGallery.setOnClickListener{startGallery()}
-//        binding.buttonAdd.setOnClickListener{uploadImage()}
 
 
     }
@@ -170,9 +175,8 @@ class AddStoryActivity : AppCompatActivity() {
     }
 
 
+    private fun uploadStories(auth: String){
 
-    private fun uploadImage(auth:String) {
-        val addStoryViewModel = ViewModelProvider(this).get(tesAddStoryViewModel::class.java)
         if (getFile != null) {
             val file = reduceFileImage(getFile as File)
 
@@ -185,49 +189,72 @@ class AddStoryActivity : AppCompatActivity() {
                 requestImageFile
             )
 
-            addStoryViewModel.uploadStory(auth,imageMultipart,description)
-            addStoryViewModel.addStory.observe(this) { uploadResponse ->
-                if (uploadResponse.error){
-                    Toast.makeText(this@AddStoryActivity, "Upload Gagal : "+uploadResponse.message, Toast.LENGTH_SHORT).show()
-                } else{
-                    val i = Intent(this@AddStoryActivity, StoryActivity::class.java)
-                    startActivity(i,
-                        ActivityOptionsCompat.makeSceneTransitionAnimation(this@AddStoryActivity).toBundle())
 
-                    Toast.makeText(this@AddStoryActivity, "Register Sukses", Toast.LENGTH_SHORT).show()
-                    finish()
+            viewModel.addStory(auth,imageMultipart,description).observe(this) { result ->
+                when (result){
+                    is Result.Loading ->{
+                        UiUtils.show(this)
+                    }
+                    is Result.Success ->{
+                        val i = Intent(this@AddStoryActivity, StoryActivity::class.java)
+                        startActivity(i,ActivityOptionsCompat.makeSceneTransitionAnimation(this@AddStoryActivity).toBundle())
+
+                        Toast.makeText(this@AddStoryActivity, "Upload Story Sukses", Toast.LENGTH_SHORT).show()
+                        finish()
+                    }
+                    is Result.Error ->{
+                        Toast.makeText(this@AddStoryActivity, "Upload Gagal : ", Toast.LENGTH_SHORT).show()
+                    }
+
+                    }
+
                 }
 
             }
-
-//            val service = ApiConfig().getApiService2(tokenAuth).uploadImage(imageMultipart,description)
-//
-//            service.enqueue(object : Callback<FileUploadResponse> {
-//                override fun onResponse(
-//                    call: Call<FileUploadResponse>,
-//                    response: Response<FileUploadResponse>
-//                ) {
-//                    if (response.isSuccessful) {
-//                        val responseBody = response.body()
-//                        if (responseBody != null && !responseBody.error) {
-//                            Toast.makeText(this@AddStoryActivity, "Upload Sukses : "+responseBody.message, Toast.LENGTH_SHORT).show()
-//                            finish()
-//                        }
-//                    } else {
-//                        Toast.makeText(this@AddStoryActivity, "Upload Gagal : "+response.message(), Toast.LENGTH_SHORT).show()
-//                    }
-//                }
-//                override fun onFailure(call: Call<FileUploadResponse>, t: Throwable) {
-//                    Toast.makeText(this@AddStoryActivity, "Gagal instance Retrofit", Toast.LENGTH_SHORT).show()
-//                }
-//            })
-//        }else {
-//            Toast.makeText(this@AddStoryActivity, "Silakan masukkan berkas gambar terlebih dahulu.", Toast.LENGTH_SHORT).show()
-//        }
-        }
         else {
             Toast.makeText(this@AddStoryActivity, "Silakan masukkan berkas gambar terlebih dahulu.", Toast.LENGTH_SHORT).show()
         }
+
+        }
+
     }
-}
+
+
+//
+//    private fun uploadImage(auth: String) {
+//        val addStoryViewModel = ViewModelProvider(this).get(tesAddStoryViewModel::class.java)
+//        if (getFile != null) {
+//            val file = reduceFileImage(getFile as File)
+//
+//            val txtDesc = binding.edAddDescription.text.toString()
+//            val description = txtDesc.toRequestBody("text/plain".toMediaType())
+//            val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+//            val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
+//                "photo",
+//                file.name,
+//                requestImageFile
+//            )
+//
+//            addStoryViewModel.uploadStory(auth,imageMultipart,description)
+//            addStoryViewModel.addStory.observe(this) { uploadResponse ->
+//                if (uploadResponse.error){
+//                    Toast.makeText(this@AddStoryActivity, "Upload Gagal : "+uploadResponse.message, Toast.LENGTH_SHORT).show()
+//                } else{
+//                    val i = Intent(this@AddStoryActivity, StoryActivity::class.java)
+//                    startActivity(i,
+//                        ActivityOptionsCompat.makeSceneTransitionAnimation(this@AddStoryActivity).toBundle())
+//
+//                    Toast.makeText(this@AddStoryActivity, "Upload Story Sukses", Toast.LENGTH_SHORT).show()
+//                    finish()
+//                }
+//
+//            }
+//
+//        }
+//        else {
+//            Toast.makeText(this@AddStoryActivity, "Silakan masukkan berkas gambar terlebih dahulu.", Toast.LENGTH_SHORT).show()
+//        }
+//    }
+//    }
+
 

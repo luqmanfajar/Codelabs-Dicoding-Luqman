@@ -2,17 +2,14 @@ package com.luqmanfajar.story_app.data.paging
 
 import android.content.Context
 import androidx.lifecycle.*
-import androidx.paging.PagingData
-import androidx.paging.cachedIn
-import com.luqmanfajar.story_app.api.ListStoryItem
 import com.luqmanfajar.story_app.data.di.Injection
-import com.luqmanfajar.story_app.data.repository.StoriesRepository
+import com.luqmanfajar.story_app.data.repository.Repository
 
 
-class StoryViewModel(storiesRepository: StoriesRepository) : ViewModel() {
+class StoryViewModel(storiesRepository: Repository) : ViewModel() {
 
-    val story: LiveData<PagingData<ListStoryItem>> =
-        storiesRepository.getStories().cachedIn(viewModelScope)
+//    val story: LiveData<PagingData<ListStoryItem>> =
+//        storiesRepository.getStories().cachedIn(viewModelScope)
 
 }
 

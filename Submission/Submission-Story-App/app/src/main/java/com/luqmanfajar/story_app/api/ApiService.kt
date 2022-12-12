@@ -18,6 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 
 
+
 data class FileUploadResponse(
     @field:SerializedName("error")
     val error: Boolean,
@@ -58,6 +59,19 @@ data class LoginResult(
 data class StoriesResponse(
     @field:SerializedName("listStory")
     val listStory: List<ListStoryItem>? = emptyList(),
+
+    @field:SerializedName("error")
+    val error: Boolean,
+
+    @field:SerializedName("message")
+    val message: String
+
+): Parcelable
+
+@Parcelize
+data class LocationResponse(
+    @field:SerializedName("listStory")
+    val listStory: List<ListStoryItem>,
 
     @field:SerializedName("error")
     val error: Boolean,
@@ -138,11 +152,28 @@ interface ApiService{
     ): Call<RegisterResponse>
 
     @FormUrlEncoded
+    @POST("/v1/register")
+    suspend fun tescreateUser(
+
+        @Field("name") name: String,
+        @Field("email") email: String,
+        @Field("password") password: String,
+
+        ): RegisterResponse
+
+    @FormUrlEncoded
     @POST("/v1/login")
     fun loginUser(
         @Field("email") email: String,
         @Field("password") password: String,
     ): Call<LoginResponse>
+
+    @FormUrlEncoded
+    @POST("/v1/login")
+    suspend fun tesloginUser(
+        @Field("email") email: String,
+        @Field("password") password: String,
+    ): LoginResponse
 
     @GET("/v1/stories")
     fun getStoriesLocation(
@@ -157,6 +188,21 @@ interface ApiService{
         @Query("page") page: Int,
         @Query("size") size: Int
     ) : StoriesResponse
+
+    @Multipart
+    @POST("/v1/stories")
+    suspend fun tesUploadStories(
+        @Header("Authorization") auth:String,
+        @Part file: MultipartBody.Part,
+        @Part("description") description: RequestBody,
+    ): FileUploadResponse
+
+    @GET("/v1/stories")
+    suspend fun getLocation(
+        @Header("Authorization") auth:String,
+        @Query("location") location: Int
+
+    ): LocationResponse
 
     @Multipart
     @POST("/v1/stories")

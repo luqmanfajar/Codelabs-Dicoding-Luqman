@@ -10,6 +10,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 
@@ -27,8 +28,11 @@ import com.luqmanfajar.story_app.api.StoriesResponse
 import com.luqmanfajar.story_app.data.preference.LoginPreferences
 import com.luqmanfajar.story_app.data.viewmodel.LoginViewModel
 import com.luqmanfajar.story_app.data.preference.PreferencesFactory
+import com.luqmanfajar.story_app.data.viewmodel.ViewModelFactory
+import com.luqmanfajar.story_app.data.viewmodel.tesMapViewModel
 import com.luqmanfajar.story_app.dataStore
 import com.luqmanfajar.story_app.databinding.ActivityMapsBinding
+import com.luqmanfajar.story_app.utils.Result
 import retrofit2.Call
 import retrofit2.Response
 import java.io.IOException
@@ -40,6 +44,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
     private val boundsBuilder = LatLngBounds.builder()
+
+    private val viewModel by viewModels<tesMapViewModel> {
+        ViewModelFactory.getInstance(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,35 +92,24 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private fun getAllStories(tokenAuth: String){
-
-        val service = ApiConfig().getApiService2(tokenAuth).getStoriesLocation(1,1)
-        service.enqueue(object : retrofit2.Callback<StoriesResponse>{
-            override fun onResponse(
-                call: Call<StoriesResponse>,
-                response: Response<StoriesResponse>
-            ) {
-                if (response.isSuccessful) {
-
-                    val responseBody = response.body()
-                    if (responseBody != null && !responseBody.error) {
-                        val arrayStory: ArrayList<ListStoryItem> = responseBody.listStory as ArrayList<ListStoryItem>
-                        addManyMarker(arrayStory)
-                        Toast.makeText(this@MapsActivity, "Data Loaded", Toast.LENGTH_SHORT).show()
-
-                    }
-                } else {
-                    Toast.makeText(this@MapsActivity, response.message(), Toast.LENGTH_SHORT).show()
+    private fun tesGetLocationStories(auth:String){
+        viewModel.getLocation(auth).observe(this){result->
+            when(result){
+                is Result.Loading -> {
 
                 }
+                is Result.Success -> {
+                    val arrayStory: ArrayList<ListStoryItem> = result.data as ArrayList<ListStoryItem>
+                    addManyMarker(arrayStory)
+                    Toast.makeText(this@MapsActivity, "Data Loaded", Toast.LENGTH_SHORT).show()
+                }
+                is Result.Error -> {
+                    Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
+                }
             }
-            override fun onFailure(call: Call<StoriesResponse>, t: Throwable) {
-                Toast.makeText(this@MapsActivity, "Gagal instance Retrofit", Toast.LENGTH_SHORT).show()
-            }
-
-        })
-
+        }
     }
+
 
     private fun addManyMarker(data : ArrayList<ListStoryItem>) {
 
@@ -170,8 +167,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         loginViewModel.getAuthKey().observe(this
         ){
                 authToken : String ->
+            val auth = "Bearer $authToken"
 
-            getAllStories(authToken!!)
+            tesGetLocationStories(auth)
         }
         getMyLocation()
 

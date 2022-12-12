@@ -20,6 +20,8 @@ import com.luqmanfajar.story_app.adapter.LoadingStateAdapter
 import com.luqmanfajar.story_app.adapter.PagingAdapter
 import com.luqmanfajar.story_app.data.paging.PagingModelFactory
 import com.luqmanfajar.story_app.data.paging.StoryViewModel
+import com.luqmanfajar.story_app.data.viewmodel.ViewModelFactory
+import com.luqmanfajar.story_app.data.viewmodel.tesStoryViewModel
 import com.luqmanfajar.story_app.map.MapsActivity
 
 
@@ -28,9 +30,9 @@ class StoryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStoryBinding
     private lateinit var rvStory: RecyclerView
 
-    private val pagingViewModel: StoryViewModel by viewModels {
+    private val pagingViewModel: tesStoryViewModel by viewModels {
 
-        PagingModelFactory(this)
+        ViewModelFactory.getInstance(this)
     }
 
 
@@ -67,7 +69,7 @@ class StoryActivity : AppCompatActivity() {
                 adapter.retry()
             }
         )
-        pagingViewModel.story.observe(this) { list ->
+        pagingViewModel.getStory.observe(this) { list ->
             adapter.submitData(lifecycle,list)
         }
     }

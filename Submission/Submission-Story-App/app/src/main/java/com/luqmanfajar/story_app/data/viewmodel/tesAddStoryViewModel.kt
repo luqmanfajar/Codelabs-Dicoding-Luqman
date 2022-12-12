@@ -13,7 +13,7 @@ import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Response
 
-class tesAddStoryViewModel(private val preferences: LoginPreferences): ViewModel() {
+class tesAddStoryViewModel: ViewModel() {
 
     private val _addStory = MutableLiveData<FileUploadResponse>()
     val addStory: LiveData<FileUploadResponse> = _addStory
