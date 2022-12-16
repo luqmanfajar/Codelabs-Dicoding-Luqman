@@ -11,7 +11,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.luqmanfajar.story_app.data.preference.LoginPreferences
-import com.luqmanfajar.story_app.data.viewmodel.AuthViewModel
+import com.luqmanfajar.story_app.data.viewmodel.AuthHelper
 import com.luqmanfajar.story_app.data.preference.PreferencesFactory
 import com.luqmanfajar.story_app.databinding.ActivityMainBinding
 import com.luqmanfajar.story_app.ui.login.LoginActivity
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         val pref = LoginPreferences.getInstance(dataStore)
 
         val loginViewModel = ViewModelProvider(this, PreferencesFactory(pref)).get(
-            AuthViewModel::class.java
+            AuthHelper::class.java
         )
 
         loginViewModel.getLoginStatus().observe(this

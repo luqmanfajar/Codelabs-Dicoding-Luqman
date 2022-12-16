@@ -12,7 +12,7 @@ import com.luqmanfajar.story_app.customview.PasswordValidate
 import com.luqmanfajar.story_app.customview.CustomButton
 import com.luqmanfajar.story_app.customview.EmailValidate
 import com.luqmanfajar.story_app.data.preference.LoginPreferences
-import com.luqmanfajar.story_app.data.viewmodel.AuthViewModel
+import com.luqmanfajar.story_app.data.viewmodel.AuthHelper
 import com.luqmanfajar.story_app.data.preference.PreferencesFactory
 import com.luqmanfajar.story_app.data.viewmodel.ViewModelFactory
 import com.luqmanfajar.story_app.dataStore
@@ -96,7 +96,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private fun saveSession(auth:String){
         val pref= LoginPreferences.getInstance(dataStore)
         val loginViewModel = ViewModelProvider(this, PreferencesFactory(pref)).get(
-            AuthViewModel::class.java
+            AuthHelper::class.java
         )
         loginViewModel.savePref(true, auth)
     }

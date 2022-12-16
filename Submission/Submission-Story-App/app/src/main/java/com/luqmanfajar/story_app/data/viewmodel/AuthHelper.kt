@@ -4,7 +4,7 @@ import androidx.lifecycle.*
 import com.luqmanfajar.story_app.data.preference.LoginPreferences
 import kotlinx.coroutines.launch
 
-class AuthViewModel(private val pref: LoginPreferences) : ViewModel() {
+class AuthHelper(private val pref: LoginPreferences) : ViewModel() {
 
     fun getLoginStatus(): LiveData<Boolean>{
         return pref.getLoginStatus().asLiveData()

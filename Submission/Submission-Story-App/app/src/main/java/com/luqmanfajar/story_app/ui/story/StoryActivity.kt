@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.luqmanfajar.story_app.R
 import com.luqmanfajar.story_app.data.preference.LoginPreferences
-import com.luqmanfajar.story_app.data.viewmodel.AuthViewModel
+import com.luqmanfajar.story_app.data.viewmodel.AuthHelper
 import com.luqmanfajar.story_app.data.preference.PreferencesFactory
 import com.luqmanfajar.story_app.dataStore
 import com.luqmanfajar.story_app.databinding.ActivityStoryBinding
@@ -81,7 +81,7 @@ class StoryActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val pref= LoginPreferences.getInstance(dataStore)
         val loginViewModel = ViewModelProvider(this, PreferencesFactory(pref)).get(
-            AuthViewModel::class.java
+            AuthHelper::class.java
         )
         loginViewModel.deleteSession()
         finish()

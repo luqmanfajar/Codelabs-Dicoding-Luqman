@@ -24,7 +24,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.luqmanfajar.story_app.R
 import com.luqmanfajar.story_app.api.ListStoryItem
 import com.luqmanfajar.story_app.data.preference.LoginPreferences
-import com.luqmanfajar.story_app.data.viewmodel.AuthViewModel
+import com.luqmanfajar.story_app.data.viewmodel.AuthHelper
 import com.luqmanfajar.story_app.data.preference.PreferencesFactory
 import com.luqmanfajar.story_app.data.viewmodel.ViewModelFactory
 import com.luqmanfajar.story_app.dataStore
@@ -111,7 +111,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         data.forEach { dataMap ->
             val latLng = LatLng(dataMap.lat, dataMap.lon)
             val addressName = getAddressName(dataMap.lat, dataMap.lon)
-            mMap.addMarker(MarkerOptions().position(latLng).title(addressName).snippet(addressName))
+            mMap.addMarker(MarkerOptions().position(latLng).title("Nama : ${dataMap.name} , ${dataMap.description}").snippet(addressName))
             boundsBuilder.include(latLng)
         }
         val bounds: LatLngBounds = boundsBuilder.build()
@@ -150,7 +150,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val pref = LoginPreferences.getInstance(dataStore)
 
         val loginViewModel = ViewModelProvider(this, PreferencesFactory(pref)).get(
-            AuthViewModel::class.java
+            AuthHelper::class.java
         )
 
         mMap = googleMap

@@ -1,0 +1,49 @@
+Unit Test Story App
+
+Skenario pada class AddStoryViewModelTest
+Mengansumsikan ketika berhasil melakukan upload story
+	1. Memastikan bahwa respon data mengembalikan Result.Success
+Mengansumsikan ketika gagal melakukan upload story
+	1. Memastikan bahwa respon data mengembalikan Result.Error
+
+Skenario pada class LoginViewModelTest
+Mengansumsikan ketika berhasil login
+	1. Memastikan bahwa respon data mengembalikan Result.Success
+Mengansumsikan ketika gagal login
+	1. Memastikan bahwa respon data mengembalikan Result.Error
+
+Skenario pada class MapViewModelTest
+Mengansumsikan ketika data location dan story berhasil di muat
+	1. Memastikan bahwa respon data mengembalikan Result.Success
+	2. Memastikan respon data tidak null
+	3. Memastikan apakah jumlah data yang dimuat sesuai 
+Mengansumsikan ketika data gagal dimuat
+	1. Memastikan bahwa respon data mengembalikan Result.Error
+	2. Memastikan respon data tidak null
+
+Skenario pada class RegisterViewModelTest
+Mengansumsikan ketika berhasil register
+	1. Memastikan bahwa respon data mengembalikan Result.Success
+Mengansumsikan ketika gagal register
+	1. Memastikan bahwa respon data mengembalikan Result.Error
+
+Skenario pada class StoriesViewModelTest
+Mengansumsikan ketika data story berhasil di muat
+	1. Memastikan bahwa respon data mengembalikan Result.Success
+	2. Memastikan respon data tidak null
+	3. Memastikan apakah jumlah data yang dimuat sesuai
+
+Skenario pada class RepositoryTest
+Diasumsikan Ketika Login Berhasil
+	1. Respon data dari api menunjukkan message success
+Diasumsikan Ketika Register Berhasil
+	1. Respon data dari api menunjukkan message success
+Diasumsikan Ketika Menampilkan List Story
+	1. Data yang diterima dari api tidak null
+	2. Jumlah data yang diterima dari api ditampilkan dengan benar
+Diasumsikan Ketika Menampilkan List Story Location
+	1. Data yang diterima dari api tidak null
+	2. Data yang diterima dari api sama dengan data yang ada pada file dummy
+	3. Jumlah data yang diterima dari api ditampilkan dengan benar
+Diasumsikan Ketika Upload File Berhasil
+	1. Respon data dari api menunjukkan message success

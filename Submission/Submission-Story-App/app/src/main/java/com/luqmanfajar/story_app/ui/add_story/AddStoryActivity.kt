@@ -93,7 +93,7 @@ class AddStoryActivity : AppCompatActivity() {
         val pref = LoginPreferences.getInstance(dataStore)
 
         val loginViewModel = ViewModelProvider(this, PreferencesFactory(pref)).get(
-            AuthViewModel::class.java
+            AuthHelper::class.java
         )
 
         loginViewModel.getAuthKey().observe(this
