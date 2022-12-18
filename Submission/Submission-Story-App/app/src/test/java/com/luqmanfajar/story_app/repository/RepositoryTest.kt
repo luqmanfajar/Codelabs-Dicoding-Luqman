@@ -4,11 +4,10 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.AsyncPagingDataDiffer
 import androidx.paging.PagingData
-import androidx.recyclerview.widget.ListUpdateCallback
 import com.luqmanfajar.story_app.adapter.PagingAdapter
 import com.luqmanfajar.story_app.api.ApiService
 import com.luqmanfajar.story_app.api.ListStoryItem
-import com.luqmanfajar.story_app.data.preference.LoginPreferences
+import com.luqmanfajar.story_app.data.preference.PreferencesData
 import com.luqmanfajar.story_app.data.repository.Repository
 import com.luqmanfajar.story_app.ui.story.StoryPagingSource
 import com.luqmanfajar.story_app.ui.story.listUpdateCallback
@@ -40,7 +39,7 @@ class RepositoryTest{
     private lateinit var api: ApiService
 
     @Mock
-    private lateinit var pref: LoginPreferences
+    private lateinit var pref: PreferencesData
 
     @Mock
     private lateinit var repo: Repository
@@ -91,9 +90,9 @@ class RepositoryTest{
         val expectedStoriesResponse = MutableLiveData<PagingData<ListStoryItem>>()
 
         expectedStoriesResponse.value = story
-        `when`(repoMock.getStories())
+        `when`(repoMock.getStories(authDummy))
             .thenReturn(expectedStoriesResponse)
-        val actualStoriesResponse = repoMock.getStories().getOrAwaitValue {}
+        val actualStoriesResponse = repoMock.getStories(authDummy).getOrAwaitValue {}
         val differ = AsyncPagingDataDiffer(
             diffCallback = PagingAdapter.DIFF_CALLBACK,
             updateCallback = listUpdateCallback

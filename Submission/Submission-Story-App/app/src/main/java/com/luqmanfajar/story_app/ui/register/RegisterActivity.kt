@@ -36,6 +36,7 @@ class RegisterActivity : AppCompatActivity() {
         }
         binding.btnRegister.setOnClickListener{
             registerUser()
+
         }
     }
 
@@ -54,8 +55,10 @@ class RegisterActivity : AppCompatActivity() {
                     result.data.let {
                         if (!it.error) {
                             showMessage(it.message)
-                            startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
+
                             finish()
+                            startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
+
                         } else {
                             showMessage(it.message)
                         }
@@ -71,6 +74,7 @@ class RegisterActivity : AppCompatActivity() {
     }
     private fun showMessage(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        finish()
     }
 
 }

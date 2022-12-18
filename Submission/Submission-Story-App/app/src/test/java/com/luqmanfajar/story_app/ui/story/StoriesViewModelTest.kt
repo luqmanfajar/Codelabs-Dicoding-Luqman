@@ -37,18 +37,20 @@ class StoriesViewModelTest{
     @Mock
     private lateinit var repo: Repository
 
+    private val authDummy = "Bearer "+DummyData.setupLoginResponse().loginResult.token
+
     @Test
-    fun `try get story but Not Null then Result is Success`() = runTest{
+    fun `try get story but Not Null then compare the response data`() = runTest{
         val storiesDummy = DummyData.setupStoryResponse()
         val story: PagingData<ListStoryItem> = StoryPagingSource.snapshot(storiesDummy)
         val expectedStoriesResponse = MutableLiveData<PagingData<ListStoryItem>>()
         expectedStoriesResponse.value = story
-        Mockito.`when`(repo.getStories())
+        Mockito.`when`(repo.getStories(authDummy))
             .thenReturn(expectedStoriesResponse)
 
         val storiesViewModel = StoriesViewModel(repo)
         val actualStoriesResponse: PagingData<ListStoryItem> =
-            storiesViewModel.getStory.getOrAwaitValue()
+            storiesViewModel.getStory(authDummy).getOrAwaitValue()
 
         val differ =AsyncPagingDataDiffer(
             diffCallback = PagingAdapter.DIFF_CALLBACK,
@@ -57,7 +59,6 @@ class StoriesViewModelTest{
         differ.submitData(actualStoriesResponse)
 
         Assert.assertNotNull(differ.snapshot())
-        Assert.assertEquals(storiesDummy, differ.snapshot())
         Assert.assertEquals(storiesDummy.size, differ.snapshot().size)
         Assert.assertEquals(storiesDummy[0].id, differ.snapshot()[0]?.id)
     }

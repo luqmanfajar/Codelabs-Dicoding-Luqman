@@ -23,8 +23,8 @@ import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import com.luqmanfajar.story_app.R
 import com.luqmanfajar.story_app.api.ListStoryItem
-import com.luqmanfajar.story_app.data.preference.LoginPreferences
-import com.luqmanfajar.story_app.data.viewmodel.AuthHelper
+import com.luqmanfajar.story_app.data.preference.PreferencesData
+import com.luqmanfajar.story_app.data.viewmodel.AuthViewModel
 import com.luqmanfajar.story_app.data.preference.PreferencesFactory
 import com.luqmanfajar.story_app.data.viewmodel.ViewModelFactory
 import com.luqmanfajar.story_app.dataStore
@@ -147,10 +147,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
 
-        val pref = LoginPreferences.getInstance(dataStore)
+        val pref = PreferencesData.getInstance(dataStore)
 
         val loginViewModel = ViewModelProvider(this, PreferencesFactory(pref)).get(
-            AuthHelper::class.java
+            AuthViewModel::class.java
         )
 
         mMap = googleMap
@@ -161,7 +161,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.uiSettings.isMapToolbarEnabled = true
         loginViewModel.getAuthKey().observe(this
         ){
-                authToken : String ->
+                authToken : String? ->
             val auth = "Bearer $authToken"
 
             GetLocationStories(auth)

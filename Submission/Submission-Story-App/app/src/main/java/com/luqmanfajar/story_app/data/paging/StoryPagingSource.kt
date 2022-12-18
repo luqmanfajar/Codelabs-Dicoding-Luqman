@@ -1,19 +1,13 @@
 package com.luqmanfajar.story_app.data.paging
 
-import androidx.datastore.preferences.protobuf.Empty
-import androidx.lifecycle.asLiveData
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.luqmanfajar.story_app.api.ApiService
 import com.luqmanfajar.story_app.api.ListStoryItem
-import com.luqmanfajar.story_app.api.StoriesResponse
-import com.luqmanfajar.story_app.api.StoriesResponseItem
-import com.luqmanfajar.story_app.data.preference.LoginPreferences
-import com.luqmanfajar.story_app.dataStore
-import kotlinx.coroutines.flow.first
+import com.luqmanfajar.story_app.data.preference.PreferencesData
 
 
-class StoryPagingSource(private val apiService: ApiService,private val preferences: LoginPreferences) : PagingSource<Int, ListStoryItem>(){
+class StoryPagingSource(private val apiService: ApiService, private val preferences: PreferencesData, private val auth:String) : PagingSource<Int, ListStoryItem>(){
 
 
 
@@ -24,7 +18,7 @@ class StoryPagingSource(private val apiService: ApiService,private val preferenc
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ListStoryItem> {
         return try {
             val page = params.key ?: INITIAL_PAGE_INDEX
-            val auth = "Bearer "+preferences.getAuthKey().first().toString()
+//            val auth = "Bearer "+preferences.getAuthKey().first().toString()
             val responseData = apiService.GetStories(auth,page,params.loadSize)
             val listStoryItem = responseData.listStory?: emptyList()
 

@@ -7,7 +7,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.luqmanfajar.story_app.api.*
 import com.luqmanfajar.story_app.data.paging.StoryPagingSource
-import com.luqmanfajar.story_app.data.preference.LoginPreferences
+import com.luqmanfajar.story_app.data.preference.PreferencesData
 import com.luqmanfajar.story_app.utils.Result
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -16,14 +16,14 @@ import java.io.IOException
 
 class Repository(
     private val apiService: ApiService,
-    private val preferences: LoginPreferences
+    private val preferences: PreferencesData
 
 ) {
     companion object {
         private var instance: Repository? = null
         fun getInstance(
             apiService: ApiService,
-            preferences: LoginPreferences
+            preferences: PreferencesData
         ): Repository = instance ?: synchronized(this) {
             instance ?: Repository(apiService,preferences)
         }
@@ -92,13 +92,13 @@ class Repository(
             }
         }
 
-    fun getStories(): LiveData<PagingData<ListStoryItem>>{
+    fun getStories(auth: String): LiveData<PagingData<ListStoryItem>>{
         return Pager(
             config = PagingConfig(
                 pageSize = 5
             ),
             pagingSourceFactory = {
-                StoryPagingSource(apiService,preferences)
+                StoryPagingSource(apiService,preferences,auth)
             }
         ).liveData
         }

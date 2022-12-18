@@ -11,8 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.luqmanfajar.story_app.customview.PasswordValidate
 import com.luqmanfajar.story_app.customview.CustomButton
 import com.luqmanfajar.story_app.customview.EmailValidate
-import com.luqmanfajar.story_app.data.preference.LoginPreferences
-import com.luqmanfajar.story_app.data.viewmodel.AuthHelper
+import com.luqmanfajar.story_app.data.preference.PreferencesData
+import com.luqmanfajar.story_app.data.viewmodel.AuthViewModel
 import com.luqmanfajar.story_app.data.preference.PreferencesFactory
 import com.luqmanfajar.story_app.data.viewmodel.ViewModelFactory
 import com.luqmanfajar.story_app.dataStore
@@ -53,6 +53,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         binding.txtMoveRegister.setOnClickListener{
             val i = Intent(this, RegisterActivity::class.java)
             startActivity(i,ActivityOptionsCompat.makeSceneTransitionAnimation(this@LoginActivity).toBundle())
+            finish()
         }
 
     }
@@ -77,6 +78,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                             finish()
                         } else {
                             showMessage(it.message)
+
                         }
                     }
                 }
@@ -91,12 +93,13 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     }
     private fun showMessage(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        finish()
     }
 
     private fun saveSession(auth:String){
-        val pref= LoginPreferences.getInstance(dataStore)
+        val pref= PreferencesData.getInstance(dataStore)
         val loginViewModel = ViewModelProvider(this, PreferencesFactory(pref)).get(
-            AuthHelper::class.java
+            AuthViewModel::class.java
         )
         loginViewModel.savePref(true, auth)
     }

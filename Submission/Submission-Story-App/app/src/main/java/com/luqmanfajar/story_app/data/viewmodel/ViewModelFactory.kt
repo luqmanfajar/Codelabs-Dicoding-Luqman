@@ -12,7 +12,7 @@ import com.luqmanfajar.story_app.ui.register.RegisterViewModel
 import com.luqmanfajar.story_app.ui.story.StoriesViewModel
 
 class ViewModelFactory private constructor(
-    private val repository: Repository
+    private val repository: Repository,
 ) : ViewModelProvider.NewInstanceFactory() {
     companion object {
         private var instance: ViewModelFactory? = null
@@ -41,6 +41,7 @@ class ViewModelFactory private constructor(
             modelClass.isAssignableFrom(MapViewModel::class.java) -> {
                 MapViewModel(repository) as T
             }
+
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }
     }

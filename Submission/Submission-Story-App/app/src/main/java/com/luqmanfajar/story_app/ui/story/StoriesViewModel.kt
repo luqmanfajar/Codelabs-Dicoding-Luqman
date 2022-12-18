@@ -9,6 +9,6 @@ import com.luqmanfajar.story_app.api.ListStoryItem
 import com.luqmanfajar.story_app.data.repository.Repository
 
 class StoriesViewModel(private val repository: Repository) : ViewModel() {
-    val getStory: LiveData<PagingData<ListStoryItem>> =
-        repository.getStories().cachedIn(viewModelScope)
+    fun getStory(authToken: String): LiveData<PagingData<ListStoryItem>> =
+        repository.getStories(authToken).cachedIn(viewModelScope)
 }

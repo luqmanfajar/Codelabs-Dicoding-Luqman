@@ -1,17 +1,17 @@
 package com.luqmanfajar.story_app.data.viewmodel
 
 import androidx.lifecycle.*
-import com.luqmanfajar.story_app.data.preference.LoginPreferences
+import com.luqmanfajar.story_app.data.preference.PreferencesData
 import kotlinx.coroutines.launch
 
-class AuthHelper(private val pref: LoginPreferences) : ViewModel() {
+class AuthViewModel(private val pref: PreferencesData) : ViewModel() {
 
-    fun getLoginStatus(): LiveData<Boolean>{
-        return pref.getLoginStatus().asLiveData()
+    fun getLoginStatus(): LiveData<Boolean?> {
+        return pref.getLoginStatus()
     }
 
-    fun getAuthKey(): LiveData<String> {
-        return pref.getAuthKey().asLiveData()
+    fun getAuthKey(): LiveData<String?> {
+        return pref.getAuthKey()
     }
     fun deleteSession(){
         viewModelScope.launch {

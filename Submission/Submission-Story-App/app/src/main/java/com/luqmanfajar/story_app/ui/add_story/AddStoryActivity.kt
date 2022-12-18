@@ -18,7 +18,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
 import com.luqmanfajar.story_app.createCustomTempFile
-import com.luqmanfajar.story_app.data.preference.LoginPreferences
+import com.luqmanfajar.story_app.data.preference.PreferencesData
 import com.luqmanfajar.story_app.data.preference.PreferencesFactory
 import com.luqmanfajar.story_app.data.viewmodel.*
 
@@ -90,15 +90,15 @@ class AddStoryActivity : AppCompatActivity() {
                 REQUEST_CODE_PERMISSIONS
             )
         }
-        val pref = LoginPreferences.getInstance(dataStore)
+        val pref = PreferencesData.getInstance(dataStore)
 
         val loginViewModel = ViewModelProvider(this, PreferencesFactory(pref)).get(
-            AuthHelper::class.java
+            AuthViewModel::class.java
         )
 
         loginViewModel.getAuthKey().observe(this
         ){
-                authToken : String ->
+                authToken : String? ->
             val auth = "Bearer $authToken"
 
             binding.buttonAdd.setOnClickListener{uploadStories(auth)}

@@ -29,9 +29,19 @@ Mengansumsikan ketika gagal register
 
 Skenario pada class StoriesViewModelTest
 Mengansumsikan ketika data story berhasil di muat
-	1. Memastikan bahwa respon data mengembalikan Result.Success
-	2. Memastikan respon data tidak null
-	3. Memastikan apakah jumlah data yang dimuat sesuai
+	1. Memastikan respon data tidak null
+	2. Memastikan apakah jumlah data yang dimuat sesuai
+	3. Memastikan id yang diterima pada response sesuai
+
+Skenario pada class AuthViewModelTest
+Mengansumsikan ketika mencoba mengambil login status ketika user telah login
+    1.Memastikan Login status tidak null
+    2.Memastikan login status yang diambil sesuai
+Mengansumsikan ketika mencoba mengambil auth token ketika user telah login
+    1.Memastikan auth token tidak null
+    2.Memastikan auth token yang diambil sesuai
+Mencoba fitur savePreference apakah berjalan dengan baik
+Mencoba fitur deletePreference apakah berjalan dengan baik
 
 Skenario pada class RepositoryTest
 Diasumsikan Ketika Login Berhasil
